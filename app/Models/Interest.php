@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Interest extends Model
+class Interest extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
 
     public function posts(): MorphMany
@@ -17,8 +19,11 @@ class Interest extends Model
         return $this->morphMany(Post::class, 'postable');
     }
 
-    public function image()
+
+    public function registerMediaCollections(): void
     {
-        return $this->morphOne(Image::class, 'imageable');
+        $this->addMediaCollection('avatar')
+            ->singleFile();
     }
+
 }

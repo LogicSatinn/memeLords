@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
         'title', 'postable_type', 'postable_id'
@@ -28,8 +30,9 @@ class Post extends Model
     }
 
 
-    public function image(): MorphOne
+    public function registerMediaCollections(): void
     {
-        return $this->morphOne(Image::class, 'imageable');
+        $this->addMediaCollection('avatar')
+            ->singleFile();
     }
 }

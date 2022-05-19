@@ -1,3 +1,5 @@
+<script src="{{ mix('js/app.js') }}"></script>
+
 <!-- For Night mode -->
 <script>
     (function (window, document, undefined) {
@@ -44,3 +46,4 @@
 <script src="{{ asset('assets/js/custom.js')}}"></script>
 <script src="{{ asset("assets/js/bootstrap-select.min.js")}}"></script>
 <script src="{{ asset('assets/js/ionicons.js') }}"></script>
+@livewireScripts
