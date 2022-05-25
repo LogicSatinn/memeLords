@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->morphs('postable');
+            $table->nullableMorphs('postable');
+            $table->string('visibility');
             $table->softDeletes();
             $table->timestamps();
         });
