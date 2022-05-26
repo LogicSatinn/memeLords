@@ -15,7 +15,7 @@ class Post extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
-        'title', 'postable_type', 'postable_id'
+        'title', 'postable_type', 'postable_id', 'visibility'
     ];
 
     protected $casts = [
@@ -30,9 +30,20 @@ class Post extends Model implements HasMedia
     }
 
 
+    public function image(): MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+
+    public function clip()
+    {
+        return $this->morphOne(VideoClip::class, 'clipable');
+    }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('avatar')
+        $this->addMediaCollection('posts')
             ->singleFile();
     }
 }

@@ -54,6 +54,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
 
+    public function image(): MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatar')

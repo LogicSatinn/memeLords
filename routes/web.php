@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -13,4 +14,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::view('/index', 'frontend.index');
+//Route::get('/index', 'frontend.index')->name('feed');
+
+Route::resource('posts', PostController::class);
