@@ -30,20 +30,9 @@ class Post extends Model implements HasMedia
     }
 
 
-    public function image(): MorphOne
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
-
-    public function clip()
-    {
-        return $this->morphOne(VideoClip::class, 'clipable');
-    }
-
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('posts')
+        $this->addMediaCollection('post')
             ->singleFile();
     }
 }

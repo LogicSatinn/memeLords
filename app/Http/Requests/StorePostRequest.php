@@ -26,7 +26,6 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|string|min:3, max:500',
             'image' => 'mimes:jpg,png|image',
-            'clip' => 'mimetypes:video/avi,video/mpeg,video/mp4|file',
             'visibility' => 'required|string'
         ];
     }

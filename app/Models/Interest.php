@@ -29,7 +29,7 @@ class Interest extends Model implements HasMedia
 
     public function clip()
     {
-        return $this->morphOne(VideoClip::class, 'clipable');
+        return $this->morphOne(Clip::class, 'clipable');
     }
 
     public function registerMediaCollections(): void

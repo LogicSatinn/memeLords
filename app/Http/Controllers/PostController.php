@@ -6,7 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Image;
 use App\Models\Post;
-use App\Models\VideoClip;
+use App\Models\Clip;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -25,7 +25,7 @@ class PostController extends Controller
     public function index()
     {
         return view('frontend.index', [
-            'posts' => Post::with(['image', 'clip'])->get()
+            'posts' => Post::with('media')->get()
         ]);
     }
 
@@ -50,33 +50,13 @@ class PostController extends Controller
         $post = Post::create($request->validated());
 
         if ($request->has('image')) {
-            $fileName = Str::kebab(strtolower($request->file('image')->getClientOriginalName())) . '.' . $request->file('image')->getClientOriginalExtension();
-
-            $path = $request->file('image')->storeAs(
-                'post_images',
-                $fileName,
-            );
-
-            $image = Image::create([
-                'image_path' => $path
-            ]);
-
-            $image->imageable()->associate($post)->save();
+            $post->addMediaFromRequest('image')
+                ->toMediaCollection('post');
         }
 
         if ($request->has('clip')) {
-            $fileName = Str::kebab(strtolower($request->file('clip')->getClientOriginalName()));
-
-            $path = $request->file('clip')->storeAs(
-                'post_clips',
-                $fileName,
-            );
-
-            $clip = VideoClip::create([
-                'clip_path' => $path
-            ]);
-
-            $clip->clipable()->associate($post)->save();
+            $post->addMediaFromRequest('clip')
+                ->toMediaCollection('post');
         }
 
 

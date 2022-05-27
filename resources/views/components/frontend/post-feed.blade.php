@@ -39,53 +39,7 @@
         </x-frontend.post-dropdown>
     </div>
 
-    <div uk-lightbox>
-        <div class="grid grid-cols-2 gap-2 px-5">
-{{--            @if($post->image() !== null)--}}
-{{--                <a href="{{ asset('storage/media/' . $mediaPath())}}"--}}
-{{--                   class="col-span-2">--}}
-{{--                    <img src="{{ asset('storage/media/' . $mediaPath())}}"--}}
-{{--                         alt="{{ $post->title }}"--}}
-{{--                         class="rounded-md w-full lg:h-76 object-cover">--}}
-{{--                </a>--}}
-{{--            @else--}}
-{{--                <a href="{{ asset('storage/media/' . $mediaPath())}}">--}}
-{{--                    <video controls class="max-h-96 w-full object-cover">--}}
-{{--                        <source--}}
-{{--                            src="{{ asset('storage/media/' . $mediaPath())}}"/>--}}
-{{--                    </video>--}}
-{{--                </a>--}}
-{{--            @endif--}}
-
-                @empty($post->image())
-                    <a href="{{ asset('storage/media/' . $mediaPath())}}"
-                       class="col-span-2">
-                        <img src="{{ asset('storage/media/' . $mediaPath())}}"
-                             alt="{{ $post->title }}"
-                             class="rounded-md w-full lg:h-76 object-cover">
-                    </a>
-                    @endempty
-                @empty($post->clip())
-                    <a href="{{ asset('storage/media/' . $mediaPath())}}"
-                       class="col-span-2">
-                        <img src="{{ asset('storage/media/' . $mediaPath())}}"
-                             alt="{{ $post->title }}"
-                             class="rounded-md w-full lg:h-76 object-cover">
-                    </a>
-            @endempty
-        </div>
-    </div>
-
-    {{--    @unless($post->clip() == null && $post->image() !== null)--}}
-    {{--    <div uk-lightbox>--}}
-    {{--        <a href="{{ asset('storage/media/' . $mediaPath())}}">--}}
-    {{--            <video controls class="max-h-96 w-full object-cover">--}}
-    {{--                <source--}}
-    {{--                    src="{{ asset('storage/media/' . $mediaPath())}}"/>--}}
-    {{--            </video>--}}
-    {{--        </a>--}}
-    {{--    </div>--}}
-    {{--    @endunless--}}
+    <x-frontend.post-feed-media :post="$post" />
 
     <div class="p-4 space-y-3">
 

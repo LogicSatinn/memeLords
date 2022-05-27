@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Frontend;
 
+use App\Models\Clip;
 use App\Models\Post;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -22,13 +23,6 @@ class PostFeed extends Component
         $this->post = $post;
     }
 
-
-    public function mediaPath()
-    {
-        return $path = $this->post->image() !== null
-            ? $this->post->image?->image_path
-            :  $this->post->clip?->clip_path;
-    }
 
     /**
      * Get the view / contents that represent the component.
