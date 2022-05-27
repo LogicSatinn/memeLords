@@ -8,24 +8,22 @@
 <div id="wrapper" class="is-collapse">
 
     <!-- Header -->
-   @include('frontend.layouts.inc.header')
+    <x-frontend.header/>
 
     <!-- sidebar -->
-    @include('frontend.layouts.inc.sidebar')
+    <x-frontend.side-bar/>
 
     <!-- Main Contents -->
-    @yield('content')
+    {{ $slot }}
 
 </div>
 
 <!-- sidechat -->
-{{--@include('frontend.layouts.inc.sidechat')--}}
-
+<x-frontend.side-chat/>
 
 
 <!-- story-preview -->
-@include('frontend.layouts.inc.story-preview')
-
+<x-frontend.story-preview/>
 
 @include('frontend.layouts.inc.scripts')
 </body>
