@@ -2,52 +2,56 @@
 
 @section('content')
 
-    <div class="main_content lg:mr-20">
+    <div class="main_content">
         <div class="mcontainer">
 
             @if($postsWithImages !== null || $postsWithClips !== null)
 
                 <!-- feed -->
                 <div class="lg:flex lg:space-x-10">
-                    <div class="lg:w-1/2 space-y-7">
+                    <div class="lg:w-3/4 lg:px-20 space-y-7">
 
                         {{--  User Story--}}
-                        <div class="user_story grid md:grid-cols-4 grid-cols-3 gap-2 relative">
+                        <div class="user_story grid md:grid-cols-5 grid-cols-3 gap-2 lg:-mx-20 relative">
 
                             <a href="#create-post" uk-toggle="target: body ; cls: story-active">
                                 <div class="single_story">
-                                    <img src="{{ asset('assets/images/avatars/avatar-lg-1')}}.jpg" alt="">
+                                    <img src="{{ asset('assets/images/avatars/avatar-lg-1.jpg')}}" alt="">
                                     <div class="story-avatar"><img
-                                            src="{{ asset('assets/images/avatars/avatar-1.jpg')}}"
-                                            alt=""></div>
-                                    <div class="story-content"><h4> Jonathan</h4></div>
+                                            src="{{ asset('assets/images/avatars/avatar-6.jpg')}}" alt=""></div>
+                                    <div class="story-content"><h4>Erica Jones </h4></div>
                                 </div>
                             </a>
                             <a href="#" uk-toggle="target: body ; cls: story-active">
                                 <div class="single_story">
-                                    <img src="{{ asset('assets/images/avatars/avatar-lg-2')}}.jpg" alt="">
+                                    <img src="{{ asset('assets/images/avatars/avatar-lg-2.jpg')}}" alt="">
                                     <div class="story-avatar"><img
-                                            src="{{ asset('assets/images/avatars/avatar-2.jpg')}}"
-                                            alt=""></div>
-                                    <div class="story-content"><h4> Jonathan</h4></div>
+                                            src="{{ asset('assets/images/avatars/avatar-2.jpg')}}" alt=""></div>
+                                    <div class="story-content"><h4> Dennis Han</h4></div>
                                 </div>
                             </a>
                             <a href="#" uk-toggle="target: body ; cls: story-active">
                                 <div class="single_story">
-                                    <img src="{{ asset('assets/images/avatars/avatar-lg-3')}}.jpg" alt="">
+                                    <img src="{{ asset('assets/images/avatars/avatar-lg-3.jpg')}}" alt="">
                                     <div class="story-avatar"><img
-                                            src="{{ asset('assets/images/avatars/avatar-3.jpg')}}"
-                                            alt=""></div>
-                                    <div class="story-content"><h4> Jonathan</h4></div>
+                                            src="{{ asset('assets/images/avatars/avatar-3.jpg')}}" alt=""></div>
+                                    <div class="story-content"><h4> Alex Mohani</h4></div>
                                 </div>
                             </a>
                             <a href="#" uk-toggle="target: body ; cls: story-active">
                                 <div class="single_story">
-                                    <img src="{{ asset('assets/images/avatars/avatar-lg-4')}}.jpg" alt="">
+                                    <img src="{{ asset('assets/images/avatars/avatar-lg-4.jpg')}}" alt="">
                                     <div class="story-avatar"><img
-                                            src="{{ asset('assets/images/avatars/avatar-4.jpg')}}"
-                                            alt=""></div>
-                                    <div class="story-content"><h4> Jonathan</h4></div>
+                                            src="{{ asset('assets/images/avatars/avatar-4.jpg')}}" alt=""></div>
+                                    <div class="story-content"><h4> Jonathan </h4></div>
+                                </div>
+                            </a>
+                            <a href="#" uk-toggle="target: body ; cls: story-active">
+                                <div class="single_story">
+                                    <img src="{{ asset('assets/images/avatars/avatar-lg-5.jpg')}}" alt="">
+                                    <div class="story-avatar"><img
+                                            src="{{ asset('assets/images/avatars/avatar-5.jpg')}}" alt=""></div>
+                                    <div class="story-content"><h4> Stella Johnson</h4></div>
                                 </div>
                             </a>
 
@@ -164,8 +168,10 @@
                                 <div uk-lightbox>
                                     <div class="grid grid-cols-2 gap-2 px-5">
 
-                                        <a href="{{ asset('storage/media/' . $postWithImage->image?->image_path)}}" class="col-span-2">
-                                            <img src="{{ asset('storage/media/' . $postWithImage->image?->image_path)}}" alt="{{ $postWithImage->title }}"
+                                        <a href="{{ asset('storage/media/' . $postWithImage->image?->image_path)}}"
+                                           class="col-span-2">
+                                            <img src="{{ asset('storage/media/' . $postWithImage->image?->image_path)}}"
+                                                 alt="{{ $postWithImage->title }}"
                                                  class="rounded-md w-full lg:h-76 object-cover">
                                         </a>
 
@@ -293,10 +299,6 @@
                             </div>
                             {{--  End Post 1--}}
                         @endforeach
-                    </div>
-
-
-                    <div class="lg:w-1/2 space-y-7 lg:mt-0 mt-7">
 
                         @foreach($postsWithClips as $postWithClip)
                             {{--    Post 2--}}
@@ -368,7 +370,8 @@
                                 <div uk-lightbox>
                                     <a href="{{ asset('storage/media/' . $postWithClip->clip?->clip_path)}}">
                                         <video controls class="max-h-96 w-full object-cover">
-                                            <source src="{{ asset('storage/media/' . $postWithClip->clip?->clip_path)}}" />
+                                            <source
+                                                src="{{ asset('storage/media/' . $postWithClip->clip?->clip_path)}}"/>
                                         </video>
                                     </a>
                                 </div>
@@ -490,18 +493,22 @@
                             {{--   End Post 2--}}
                         @endforeach
 
+
                         <div class="flex justify-center mt-6">
                             <a href="#"
                                class="bg-white dark:bg-gray-900 font-semibold my-3 px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white">
                                 Load more ..</a>
                         </div>
+
+
                     </div>
 
+                    @include('frontend.layouts.inc.side-panel')
                 </div>
 
             @else
                 <div class="lg:flex lg:space-x-10">
-                    <div class="lg:w-1/2 space-y-7">
+                    <div class="lg:w-3/4 lg:px-20 space-y-7">
                         {{-- Posting card--}}
                         <div class="card lg:mx-0 p-4">
                             <div class="flex space-y-3 mb-4">
