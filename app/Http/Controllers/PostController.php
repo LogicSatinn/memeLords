@@ -66,7 +66,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Post $post
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -77,7 +77,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Post $post
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
@@ -88,23 +88,27 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdatePostRequest $request
-     * @param \App\Models\Post $post
-     * @return \Illuminate\Http\Response
+     * @param UpdatePostRequest $request
+     * @param Post $post
+     * @return Application|Redirector|RedirectResponse
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->update($request->validated());
+
+        return redirect(route('posts.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Post $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return Application|Redirector|RedirectResponse
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect(route('posts.index'));
     }
 }

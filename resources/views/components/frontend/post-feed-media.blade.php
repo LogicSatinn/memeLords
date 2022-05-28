@@ -1,4 +1,4 @@
-@props(['post' => 'post'])
+@aware(['post'])
 
 <div uk-lightbox>
     <div class="grid grid-cols-2 gap-2 px-5">

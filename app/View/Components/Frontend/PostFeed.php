@@ -7,20 +7,21 @@ use App\Models\Post;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class PostFeed extends Component
 {
 
-    public Post $post;
+    public Collection $posts;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($posts)
     {
-        $this->post = $post;
+        $this->posts = $posts;
     }
 
 
