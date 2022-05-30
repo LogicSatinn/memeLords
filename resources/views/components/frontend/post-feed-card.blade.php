@@ -22,7 +22,7 @@
             <x-frontend.form-section id="deletePost" action="{{ route('posts.destroy', $post) }}" method="POST">
                 <x-slot:form>
                 @method('DELETE')
-                <x-frontend.post-dropdown-link uk-toggle="target: #edit-post-modal">
+                <x-frontend.post-dropdown-link uk-toggle="target: #edit-post-modal{{$post->id}}">
                     <i class="uil-edit-alt mr-2"></i> Edit Post
                 </x-frontend.post-dropdown-link>
 
@@ -156,14 +156,14 @@
 
 
     {{-- Edit video modal --}}
-    <x-frontend.post-modal id="edit-post-modal">
+    <x-frontend.post-modal id="edit-post-modal{{$post->id}}">
 
         <x-frontend.modal-header :title="'Edit Post'"/>
 
         <x-frontend.form-section action="{{ route('posts.update', $post) }}" enctype="multipart/form-data">
             <x-slot:form>
                 @method('PUT')
-                <x-frontend.modal.content/>
+                <x-frontend.modal.post-edit-modal :post="$post"/>
             </x-slot:form>
         </x-frontend.form-section>
     </x-frontend.post-modal>
