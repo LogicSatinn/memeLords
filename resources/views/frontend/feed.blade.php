@@ -17,9 +17,9 @@
 
         <x-frontend.form-section action="{{ route('posts.store') }}" enctype="multipart/form-data">
             <x-slot:form>
-               <x-frontend.modal.content>
-                   <x-frontend.modal.post-button-image name="image" />
-               </x-frontend.modal.content>
+                <x-frontend.modal.content>
+                    <x-frontend.modal.post-button-image name="image"/>
+                </x-frontend.modal.content>
             </x-slot:form>
         </x-frontend.form-section>
     </x-frontend.post-modal>
@@ -32,25 +32,13 @@
 
         <x-frontend.form-section action="{{ route('posts.store') }}" enctype="multipart/form-data">
             <x-slot:form>
-                <x-frontend.modal.content name="clip" >
-                    <x-frontend.modal.post-button-clip name="clip" />
+                <x-frontend.modal.content name="clip">
+                    <x-frontend.modal.post-button-clip name="clip"/>
                 </x-frontend.modal.content>
             </x-slot:form>
         </x-frontend.form-section>
     </x-frontend.post-modal>
     {{-- End Create video modal --}}
 
-{{--    --}}{{-- Edit video modal --}}
-{{--    <x-frontend.post-modal id="edit-post-modal">--}}
-
-{{--        <x-frontend.modal-header :title="'Edit Post'"/>--}}
-
-{{--        <x-frontend.form-section action="{{ route('posts.update', $post) }}" enctype="multipart/form-data">--}}
-{{--            <x-slot:form>--}}
-{{--                <x-frontend.modal.content/>--}}
-{{--            </x-slot:form>--}}
-{{--        </x-frontend.form-section>--}}
-{{--    </x-frontend.post-modal>--}}
-{{--    --}}{{-- End Edit video modal --}}
 
 </x-master-layout>

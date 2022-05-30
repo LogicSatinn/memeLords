@@ -14,4 +14,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('posts', PostController::class)->only(['index', 'store', 'update', 'delete']);
+Route::resource('posts', PostController::class)->only(['index', 'store', 'update', 'destroy']);
+
+Route::view('/topics', 'frontend.topics');

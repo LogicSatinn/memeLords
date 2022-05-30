@@ -20,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('frontend.index', [
+        return view('frontend.feed', [
             'posts' => Post::with('media')->get()
         ]);
     }
