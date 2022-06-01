@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,7 +18,8 @@ Route::get('/dashboard', function () {
 
 Route::resource('posts', PostController::class)->only(['index', 'store', 'update', 'destroy']);
 
-//Route::view('/topics', 'frontend.topics.index');
-//Route::view('/topics/create', 'frontend.topics.create');
-
 Route::resource('topics', TopicController::class);
+
+Route::resource('profile', UserController::class);
+
+Route::view('profile', 'frontend.profile');
