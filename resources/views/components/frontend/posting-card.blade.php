@@ -2,7 +2,7 @@
     <div class="flex space-x-3">
         <img src="{{ asset('assets/images/avatars/avatar-2.jpg')}}"
              class="w-10 h-10 rounded-full">
-        <div class="bg-white text-black flex-1 h-10 p-2 rounded-full">
+        <div class="bg-white flex-1 h-10 p-2 rounded-full">
             <p>Try posting something.</p>
         </div>
     </div>
