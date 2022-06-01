@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,24 +16,32 @@ class Post extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
-        'title', 'postable_type', 'postable_id'
+        'title', 'user_id', 'topic_id', 'visibility'
     ];
 
     protected $casts = [
         'title' => 'string',
-        'postable_id' => 'integer'
+        'user_id' => 'integer',
+        'topic_id' => 'integer',
+        'visibility' => 'string'
     ];
 
 
-    public function postable(): MorphTo
+    public function topic(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(Topic::class);
+    }
+
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('avatar')
+        $this->addMediaCollection('post')
             ->singleFile();
     }
 }

@@ -5,82 +5,106 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
+        return view('frontend.feed', [
+            'posts' => Post::with('media')->get()
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+//    /**
+//     * Show the form for creating a new resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function create()
+//    {
+//        //
+//    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePostRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StorePostRequest $request
+     * @return Application|RedirectResponse|Redirector
      */
     public function store(StorePostRequest $request)
     {
-        //
-    }
+        $post = Post::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
-    }
+        if ($request->has('image')) {
+            $post->addMediaFromRequest('image')
+                ->toMediaCollection('post');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
+        if ($request->has('clip')) {
+            $post->addMediaFromRequest('clip')
+                ->toMediaCollection('post');
+        }
+
+
+        return redirect(route('posts.index'));
     }
+//
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param Post $post
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function show(Post $post)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param Post $post
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function edit(Post $post)
+//    {
+//        //
+//    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param UpdatePostRequest $request
+     * @param Post $post
+     * @return Application|Redirector|RedirectResponse
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->update($request->validated());
+
+        return redirect(route('posts.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return Application|Redirector|RedirectResponse
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect(route('posts.index'));
     }
 }

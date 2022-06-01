@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -13,4 +15,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::view('/index', 'frontend.index');
+Route::resource('posts', PostController::class)->only(['index', 'store', 'update', 'destroy']);
+
+//Route::view('/topics', 'frontend.topics.index');
+//Route::view('/topics/create', 'frontend.topics.create');
+
+Route::resource('topics', TopicController::class);

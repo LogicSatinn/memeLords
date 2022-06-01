@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -48,9 +49,9 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
 
-    public function posts(): MorphMany
+    public function posts(): HasMany
     {
-        return $this->morphMany(Post::class, 'postable');
+        return $this->hasMany(Post::class);
     }
 
 
