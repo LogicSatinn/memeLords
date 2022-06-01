@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Interest;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class InterestPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Interest  $interest
+     * @param  \App\Models\Topic  $interest
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Interest $interest)
+    public function view(User $user, Topic $interest)
     {
         //
     }
@@ -48,10 +48,10 @@ class InterestPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Interest  $interest
+     * @param  \App\Models\Topic  $interest
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Interest $interest)
+    public function update(User $user, Topic $interest)
     {
         //
     }
@@ -60,10 +60,10 @@ class InterestPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Interest  $interest
+     * @param  \App\Models\Topic  $interest
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Interest $interest)
+    public function delete(User $user, Topic $interest)
     {
         //
     }
@@ -72,10 +72,10 @@ class InterestPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Interest  $interest
+     * @param  \App\Models\Topic  $interest
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Interest $interest)
+    public function restore(User $user, Topic $interest)
     {
         //
     }
@@ -84,10 +84,10 @@ class InterestPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Interest  $interest
+     * @param  \App\Models\Topic  $interest
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Interest $interest)
+    public function forceDelete(User $user, Topic $interest)
     {
         //
     }

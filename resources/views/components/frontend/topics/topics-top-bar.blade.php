@@ -9,7 +9,7 @@
             </ul>
         </nav>
     </div>
-    <a href="create-group.html"
+    <a href="{{ route('topics.create') }}"
        class="flex items-center justify-center h-9 lg:px-5 px-2 rounded-md bg-blue-600 text-white space-x-1.5 absolute right-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
             <path fill-rule="evenodd"

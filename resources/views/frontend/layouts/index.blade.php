@@ -14,8 +14,13 @@
     <x-frontend.side-bar/>
 
     <!-- Main Contents -->
-    {{ $slot }}
+    <div class="main_content">
+        <div class="mcontainer">
 
+            {{ $slot }}
+
+        </div>
+    </div>
 </div>
 
 <!-- sidechat -->

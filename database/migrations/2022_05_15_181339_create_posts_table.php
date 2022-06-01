@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->nullableMorphs('postable');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('topic_id')->nullable()->constrained();
             $table->string('visibility');
             $table->softDeletes();
             $table->timestamps();

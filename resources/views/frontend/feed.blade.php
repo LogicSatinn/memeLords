@@ -1,14 +1,7 @@
 <x-master-layout>
-
-    <div class="main_content">
-        <div class="mcontainer">
-
-            {{--     Feed      --}}
-            <x-frontend.post-feed :posts="$posts"/>
-            {{--    End Feed     --}}
-        </div>
-    </div>
-
+    {{--     Feed      --}}
+    <x-frontend.post-feed :posts="$posts"/>
+    {{--    End Feed     --}}
 
     {{-- Create Image modal --}}
     <x-frontend.post-modal id="create-image-modal">
