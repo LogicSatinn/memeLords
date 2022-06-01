@@ -64,10 +64,12 @@
 
                 <div class="header_widgets">
 
+                    @guest
                     <div class="capitalize flex font-semibold hidden lg:block my-2 space-x-2 text-center text-sm">
                         <a href="{{ route('login') }}" class="py-3 px-4"> Login </a>
                         <a href="{{ route('register') }}" class="bg-purple-500 purple-500 px-5 py-3 rounded-md shadow text-white">Register</a>
                     </div>
+                    @endguest
 
                     <a href="#" class="is_icon" uk-tooltip="title: Notifications">
                         <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

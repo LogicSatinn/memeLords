@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -14,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasMedia, MustVerifyEmail
+class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia;
 
@@ -26,6 +27,8 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'username',
+        'about_me',
         'password',
     ];
 
@@ -45,8 +48,20 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
+        'name' => 'string',
+        'email' => 'string',
+        'username' => 'string',
+        'about_me' => 'string',
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function username()
+    {
+        return Attribute::make(
+            get: fn($value) => '@' . $value,
+        );
+    }
 
 
     public function posts(): HasMany
