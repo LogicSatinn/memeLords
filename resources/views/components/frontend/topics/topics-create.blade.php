@@ -3,7 +3,7 @@
     <div class="breadcrumb">
         <ul class="m-0">
             <li>
-                <a href="#">Topics</a>
+                <a href="{{ route('topics.index') }}">Topics</a>
             </li>
             <li class="active">
                 <a href="#">Create New Topic </a>
