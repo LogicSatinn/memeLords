@@ -6,9 +6,12 @@
     </a>
     <div class="flex-1">
         <a href="#" class="text-base font-semibold capitalize"> {{ $topic->name }}  </a>
-        <div class="text-sm text-gray-500 mt-0.5"> {{ $topic->users->count() }}  memeLord(s) </div>
+        <div class="text-sm text-gray-500 mt-0.5"> {{ $topic->users->count() }} memeLord(s)</div>
     </div>
-    <a href="#" class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold bg-blue-500 text-white">
-        Join
-    </a>
+    @unless($topic->users()->whereId(auth()->id())->exists())
+        <a href="{{ route('joinTopic', $topic) }}"
+           class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold bg-blue-500 text-white">
+            Join
+        </a>
+    @endunless
 </div>

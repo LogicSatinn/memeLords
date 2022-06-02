@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class TopicController extends Controller
 {
@@ -21,7 +23,7 @@ class TopicController extends Controller
     public function index()
     {
         return view('frontend.topics.index', [
-            'topics' => Topic::with('media')->get()
+            'topics' => Topic::with('media', 'users', 'posts')->get()
         ]);
     }
 
@@ -96,8 +98,12 @@ class TopicController extends Controller
         $topic->update($request->validated());
 
         if ($request->has('cover_image')) {
-            $topic->addMediaFromRequest('cover_image')
-                ->toMediaCollection('topics');
+            try {
+                $topic->addMediaFromRequest('cover_image')
+                    ->toMediaCollection('topics');
+            } catch (FileDoesNotExist|FileIsTooBig $e) {
+                return back();
+            }
         }
 
         return redirect(route('topics.index'));
@@ -114,5 +120,15 @@ class TopicController extends Controller
         $topic->delete();
 
         return redirect(route('topics.index'));
+    }
+
+
+    public function joinTopic(Topic $topic): RedirectResponse
+    {
+        if (! $topic->users()->whereId(auth()->id())->exists()) {
+            $topic->users()->attach(auth()->id());
+        }
+
+        return back();
     }
 }

@@ -18,6 +18,8 @@ Route::get('/dashboard', function () {
 
 Route::resource('posts', PostController::class)->only(['index', 'store', 'update', 'destroy']);
 
+Route::any('/topics/{topic}/join-topic', [TopicController::class, 'joinTopic'])->name('joinTopic');
+
 Route::resource('topics', TopicController::class);
 
 Route::resource('profile', UserController::class)->parameters([
