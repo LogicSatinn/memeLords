@@ -54,12 +54,14 @@
         {{--End User Story--}}
 
         {{-- Posting card--}}
-        <x-frontend.posting-card />
+        @auth
+            <x-frontend.posting-card/>
+        @endauth
         {{--End Posting Card--}}
 
         @foreach($posts as $post)
             {{--   Post Feed --}}
-            <x-frontend.post-feed-card :post="$post" />
+            <x-frontend.post-feed-card :post="$post"/>
             {{--  End Post Feed --}}
         @endforeach
 

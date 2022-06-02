@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class UserController extends Controller
 {
@@ -42,18 +47,20 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return Application|Factory|View
      */
     public function show(User $user)
     {
-        //
+        return view('frontend.profile', compact('user'), [
+            'posts' => $user->posts,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -64,13 +71,13 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateUserRequest  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return Application|RedirectResponse|Redirector
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        if ($request->hasAny(['name', 'username', 'email'])) {
+        if ($request->filled(['name', 'username', 'email'])) {
             $user->update($request->validated());
         }
 
@@ -79,17 +86,19 @@ class UserController extends Controller
                 ->toMediaCollection('avatar');
         }
 
-        return 'done';
+        return redirect(route('profile.show', [$user]));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return Application|Redirector|RedirectResponse
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect('/');
     }
 }

@@ -13,6 +13,37 @@ use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * App\Models\Topic
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $category
+ * @property string $visibility
+ * @property int|null $created_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Topic onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Topic whereVisibility($value)
+ * @method static \Illuminate\Database\Query\Builder|Topic withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Topic withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Topic extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;

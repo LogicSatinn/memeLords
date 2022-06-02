@@ -20,6 +20,6 @@ Route::resource('posts', PostController::class)->only(['index', 'store', 'update
 
 Route::resource('topics', TopicController::class);
 
-Route::resource('profile', UserController::class);
-
-Route::view('profile', 'frontend.profile');
+Route::resource('profile', UserController::class)->parameters([
+    'profile' => 'user'
+]);

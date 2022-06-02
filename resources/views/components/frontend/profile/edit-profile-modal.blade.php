@@ -8,7 +8,7 @@
             <h4> Edit Profile </h4>
         </div>
 
-        <x-frontend.form-section action="{{ route('profile.update', auth()->user()) }}" enctype="multipart/form-data">
+        <x-frontend.form-section action="{{ route('profile.update', auth()->id()) }}" enctype="multipart/form-data">
             <x-slot name="form">
                 @method('PUT')
                 <div class="p-6 space-y-3 flex-1">
