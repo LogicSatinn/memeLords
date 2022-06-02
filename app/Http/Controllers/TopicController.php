@@ -50,6 +50,12 @@ class TopicController extends Controller
                 ->toMediaCollection('topics');
         }
 
+        $topic->owner()
+            ->associate(auth()->user())
+            ->save();
+
+        $topic->users()->attach(auth()->id());
+
         return redirect(route('topics.index'));
     }
 
@@ -61,7 +67,10 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        return view('frontend.topics.show', compact('topic'));
+        return view('frontend.topics.show', compact('topic'), [
+            'topic' => $topic->load('users', 'posts'),
+            'relatedTopics' => Topic::with('users')->whereCategory($topic->category)->get(),
+        ]);
     }
 
     /**

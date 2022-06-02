@@ -1,4 +1,4 @@
-@props(['topic'])
+@props(['topic', 'users'])
 
 <div class="profile is_group">
 
@@ -9,7 +9,7 @@
 
         <div class="profile_info">
             <h1> {{ $topic->name }} </h1>
-            <p> Public ·  12k members</p>
+            <p> {{ $topic->visibility }} · {{ $topic->users->count() }} memeLords</p>
         </div>
         <div class="flex items-center space-x-4">
             <a href="#" class="flex items-center justify-center h-9 px-5 rounded-md bg-blue-600 text-white  space-x-1.5">

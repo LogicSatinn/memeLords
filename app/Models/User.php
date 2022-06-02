@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -122,6 +123,17 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Post::class);
     }
 
+
+    public function myTopic(): HasMany
+    {
+        return $this->hasMany(Topic::class, 'created_by');
+    }
+
+
+    public function topics(): BelongsToMany
+    {
+        return $this->belongsToMany(Topic::class);
+    }
 
 
     public function registerMediaCollections(): void

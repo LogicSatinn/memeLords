@@ -33,7 +33,7 @@
     <x-frontend.profile.edit-profile-modal/>
     {{--    End Edit Profile Modal--}}
 
-    
+
     {{-- Create Image modal --}}
     <x-frontend.post-modal id="create-image-modal">
 
