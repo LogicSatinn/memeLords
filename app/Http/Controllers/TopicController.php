@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
+use App\Models\Category;
 use App\Models\Topic;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -23,7 +24,13 @@ class TopicController extends Controller
     public function index()
     {
         return view('frontend.topics.index', [
-            'topics' => Topic::with('media', 'users', 'posts')->get()
+            'suggestedTopics' => Topic::with(['media', 'posts'])->whereHas('users', function ($query) {
+                $query->whereNot(function ($query) {
+                    $query->whereId(auth()->id());
+                });
+            })->get(),
+            'topics' => auth()->user()->topics,
+            'categories' => Category::with('media')->get()
         ]);
     }
 
@@ -34,7 +41,9 @@ class TopicController extends Controller
      */
     public function create()
     {
-        return view('frontend.topics.create');
+        return view('frontend.topics.create', [
+            'categories' => Category::pluck('name', 'id')
+        ]);
     }
 
     /**
@@ -58,6 +67,8 @@ class TopicController extends Controller
 
         $topic->users()->attach(auth()->id());
 
+        $topic->categories()->attach($request['category']);
+
         return redirect(route('topics.index'));
     }
 
@@ -70,8 +81,14 @@ class TopicController extends Controller
     public function show(Topic $topic)
     {
         return view('frontend.topics.show', compact('topic'), [
-            'topic' => $topic->load('users', 'posts'),
-            'relatedTopics' => Topic::with('users')->whereCategory($topic->category)->get(),
+            'topic' => $topic->load('users', 'posts', 'owner'),
+            'relatedTopics' => Topic::with('users')
+                ->whereHas('categories', function ($query) {
+                    $query->groupBy('name');
+                })->whereNot(function ($query) use($topic) {
+                    $query->whereId($topic->id);
+                })
+                ->get(),
         ]);
     }
 
@@ -83,7 +100,10 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        return view('frontend.topics.edit', compact('topic'));
+        return view('frontend.topics.edit', [
+            'topic' => $topic,
+            'categories' => Category::pluck('name', 'id')
+        ]);
     }
 
     /**
@@ -106,6 +126,8 @@ class TopicController extends Controller
             }
         }
 
+        $topic->categories()->sync($request['category']);
+
         return redirect(route('topics.index'));
     }
 
@@ -125,7 +147,7 @@ class TopicController extends Controller
 
     public function joinTopic(Topic $topic): RedirectResponse
     {
-        if (! $topic->users()->whereId(auth()->id())->exists()) {
+        if (!$topic->users()->whereId(auth()->id())->exists()) {
             $topic->users()->attach(auth()->id());
         }
 

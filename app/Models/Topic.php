@@ -61,13 +61,12 @@ class Topic extends Model implements HasMedia
 
 
     protected $fillable = [
-        'name', 'category', 'visibility', 'description'
+        'name', 'visibility', 'description'
     ];
 
 
     protected $casts = [
         'name' => 'string',
-        'category' => 'string',
         'visibility' => 'string',
         'description' => 'string'
     ];
@@ -98,6 +97,11 @@ class Topic extends Model implements HasMedia
         return $this->belongsToMany(User::class);
     }
 
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
+    }
 
     public function registerMediaCollections(): void
     {

@@ -15,7 +15,9 @@
 
 
     <x-frontend.topics.categories-slider>
-        <x-frontend.topics.categories-slider-card/>
+        @foreach($categories as $category)
+            <x-frontend.topics.categories-slider-card :category="$category"/>
+        @endforeach
     </x-frontend.topics.categories-slider>
 
     <br>
@@ -23,7 +25,9 @@
     <x-frontend.topics.more-suggestions-top-bar/>
 
     <x-frontend.topics.more-suggestions-list>
-        <x-frontend.topics.more-suggestions-list-card/>
+        @foreach($suggestedTopics as $suggestedTopic)
+            <x-frontend.topics.more-suggestions-list-card :topic="$suggestedTopic"/>
+        @endforeach
     </x-frontend.topics.more-suggestions-list>
 
 
