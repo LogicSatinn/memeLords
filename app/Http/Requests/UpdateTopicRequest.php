@@ -25,7 +25,7 @@ class UpdateTopicRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|min:3',
-            'category' => 'string',
+            'category' => 'array',
             'visibility' => 'string',
             'cover_image' => 'image|mimes:jpg,png'
         ];

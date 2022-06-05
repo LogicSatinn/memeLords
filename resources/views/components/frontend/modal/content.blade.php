@@ -1,12 +1,17 @@
 <div class="flex flex-1 items-start space-x-4 p-5">
-    <img src="{{ asset('assets/images/avatars/avatar-2.jpg')}}"
-         class="bg-gray-200 border border-white rounded-full w-11 h-11">
+    @if(auth()->user()?->getMedia('avatar')->count() === 0)
+        <img src="{{ asset('avatar.webp')}}" class="bg-gray-200 border border-white rounded-full w-11 h-11"
+             alt="{{ auth()->user()->name }}">
+    @else
+        <img src="{{ auth()->user()?->getFirstMediaUrl('avatar') }}"
+             class="bg-gray-200 border border-white rounded-full w-11 h-11" alt="{{ auth()->user()?->name }}">
+    @endif
     <div class="flex-1 pt-2">
                     <textarea
                         class="uk-textarea text-black shadow-none focus:shadow-none text-xl font-medium resize-none"
                         rows="5"
                         name="title"
-                        placeholder="What's cracking you up ? Stella!"></textarea>
+                        placeholder="What's cracking you up ? {{ auth()->user()?->username }}!"></textarea>
     </div>
 
 </div>

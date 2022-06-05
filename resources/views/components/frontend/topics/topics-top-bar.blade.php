@@ -3,9 +3,8 @@
         <h2 class="text-2xl font-semibold"> Topics </h2>
         <nav class="responsive-nav border-b md:m-0 -mx-4">
             <ul>
-                <li class="active"><a href="#" class="lg:px-2"> Suggestions </a></li>
-                <li><a href="#" class="lg:px-2"> Newest </a></li>
-                <li><a href="#" class="lg:px-2"> My group </a></li>
+                <li class="active"><a href="#" class="lg:px-2"> My Topics </a></li>
+
             </ul>
         </nav>
     </div>

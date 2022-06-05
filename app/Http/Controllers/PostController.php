@@ -21,7 +21,7 @@ class PostController extends Controller
     public function index()
     {
         return view('frontend.feed', [
-            'posts' => Post::with('media')->get()
+            'posts' => Post::with('media', 'user')->get()
         ]);
     }
 
@@ -55,6 +55,8 @@ class PostController extends Controller
                 ->toMediaCollection('post');
         }
 
+        $post->user_id = auth()->id();
+        $post->save();
 
         return redirect(route('posts.index'));
     }

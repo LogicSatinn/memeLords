@@ -24,7 +24,7 @@
 </div>
 
 <!-- sidechat -->
-<x-frontend.side-chat/>
+{{--<x-frontend.side-chat/>--}}
 
 
 <!-- story-preview -->
