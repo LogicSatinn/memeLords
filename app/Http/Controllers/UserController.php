@@ -54,6 +54,7 @@ class UserController extends Controller
     {
         return view('frontend.profile', compact('user'), [
             'posts' => $user->posts,
+            'topics' => $user->topics
         ]);
     }
 

@@ -23,7 +23,7 @@
             </div>
 
             <!-- Sidebar -->
-            <x-frontend.profile.profile-sidebar/>
+            <x-frontend.profile.profile-sidebar :topics="$topics"/>
         </div>
 
     </div>
