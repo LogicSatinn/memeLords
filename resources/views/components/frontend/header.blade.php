@@ -10,8 +10,8 @@
 
                 <div id="logo">
                     <a href="feed.html">
-                        <img src="{{ asset('assets/images/logo.png')}}" alt="">
-                        <img src="{{ asset('assets/images/logo-mobile.png')}}" class="logo_mobile" alt="">
+                        <img src="{{ asset('logo/default-monochrome-black.svg')}}" alt="">
+                        <img src="{{ asset('logo/default-monochrome-black.svg')}}" class="logo_mobile" alt="">
                     </a>
                 </div>
             </div>
