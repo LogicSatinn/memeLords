@@ -1,7 +1,13 @@
 <div class="card lg:mx-0 p-4">
     <div class="flex space-x-3">
-        <img src="{{ asset('assets/images/avatars/avatar-2.jpg')}}"
-             class="w-10 h-10 rounded-full">
+        @if(auth()->user()?->getMedia('avatar')->count() === 0)
+            <img src="{{ asset('avatar.webp')}}"
+                 class="w-10 h-10 rounded-full">
+        @else
+            <img src="{{ asset(auth()->user()?->getFirstMediaUrl('avatar'))}}"
+                 class="w-10 h-10 rounded-full">
+        @endif
+
         <div class="bg-white flex-1 h-10 p-2 rounded-full">
             <p>Try posting something.</p>
         </div>

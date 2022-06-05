@@ -6,11 +6,16 @@
     <div class="flex justify-between items-center lg:p-4 p-2.5">
         <div class="flex flex-1 items-center space-x-4">
             <a href="#">
-                <img src="{{ asset('assets/images/avatars/avatar-2.jpg')}}"
-                     class="bg-gray-200 border border-white rounded-full w-10 h-10">
+                @if($post->user->getMedia('avatar')->count() === 0)
+                    <img src="{{ asset('avatar.webp')}}"
+                         class="bg-gray-200 border border-white rounded-full w-10 h-10" alt="{{ $post->user->name }}">
+                @else
+                    <img src="{{ asset($post->user->getFirstMediaUrl('avatar'))}}"
+                         class="bg-gray-200 border border-white rounded-full w-10 h-10" alt="{{ $post->user->name }}">
+                @endif
             </a>
             <div class="flex-1 font-semibold capitalize">
-                <a href="#" class="text-black dark:text-gray-100"> Johnson smith </a>
+                <a href="#" class="text-black dark:text-gray-100"> {{ $post->user->username }} </a>
                 <div class="text-gray-700 flex items-center space-x-2">
                     {{ $post->title }}
                     <ion-icon name="people"></ion-icon>
@@ -18,27 +23,30 @@
             </div>
         </div>
 
-        <x-frontend.post-dropdown>
-            <x-frontend.form-section id="deletePost" action="{{ route('posts.destroy', $post) }}" method="POST">
-                <x-slot:form>
-                @method('DELETE')
-                <x-frontend.post-dropdown-link uk-toggle="target: #edit-post-modal{{$post->id}}">
-                    <i class="uil-edit-alt mr-2"></i> Edit Post
-                </x-frontend.post-dropdown-link>
+        @if($post->user->id === auth()->id())
+            <x-frontend.post-dropdown>
+                <x-frontend.form-section id="deletePost" action="{{ route('posts.destroy', $post) }}" method="POST">
+                    <x-slot:form>
+                        @method('DELETE')
+                        <x-frontend.post-dropdown-link uk-toggle="target: #edit-post-modal{{$post->id}}">
+                            <i class="uil-edit-alt mr-2"></i> Edit Post
+                        </x-frontend.post-dropdown-link>
 
-                {{--            <x-frontend.post-dropdown-link href="#">--}}
-                {{--                <i class="uil-favorite mr-2"></i> Add favorites--}}
-                {{--            </x-frontend.post-dropdown-link>--}}
+                        {{--            <x-frontend.post-dropdown-link href="#">--}}
+                        {{--                <i class="uil-favorite mr-2"></i> Add favorites--}}
+                        {{--            </x-frontend.post-dropdown-link>--}}
 
-                <x-frontend.post-dropdown-link href="{{ route('posts.destroy', $post) }}" onclick="event.preventDefault(); document.getElementById('deletePost').submit();">
-                    <i class="uil-trash-alt mr-2"></i> Delete
-                </x-frontend.post-dropdown-link>
-                </x-slot:form>
-            </x-frontend.form-section>
-        </x-frontend.post-dropdown>
+                        <x-frontend.post-dropdown-link href="{{ route('posts.destroy', $post) }}"
+                                                       onclick="event.preventDefault(); document.getElementById('deletePost').submit();">
+                            <i class="uil-trash-alt mr-2"></i> Delete
+                        </x-frontend.post-dropdown-link>
+                    </x-slot:form>
+                </x-frontend.form-section>
+            </x-frontend.post-dropdown>
+        @endif
     </div>
 
-    <x-frontend.post-feed-media :post="$post" />
+    <x-frontend.post-feed-media :post="$post"/>
 
     <div class="p-4 space-y-3">
 

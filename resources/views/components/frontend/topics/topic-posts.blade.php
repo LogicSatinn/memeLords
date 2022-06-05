@@ -1,33 +1,34 @@
-@props(['posts', 'topic'])
+@props(['posts', 'topic', 'relatedTopics'])
 
 <div class="md:flex md:space-x-6 lg:mx-16">
     <div class="space-y-5 flex-shrink-0 md:w-7/12">
 
         {{-- Posting card--}}
-        <x-frontend.posting-card />
+        @auth
+            <x-frontend.posting-card/>
+        @endauth
         {{--End Posting Card--}}
 
 
         @foreach($posts as $post)
             {{--   Post Feed --}}
-            <x-frontend.post-feed-card :post="$post" />
+            <x-frontend.post-feed-card :post="$post"/>
             {{--  End Post Feed --}}
         @endforeach
 
-        <div class="flex justify-center mt-6">
-            <a href="#" class="bg-white dark:bg-gray-900 font-semibold my-3 px-6 py-2 rounded-full shadow-md dark:bg-gray-800 dark:text-white">
-                Load more ..</a>
-        </div>
+        <x-frontend.load-more/>
 
     </div>
 
 
     <div class="w-full flex-shirink-0">
-        <x-frontend.topics.topic-actions :topic="$topic" />
+        @if($topic->owner->id === auth()->id())
+            <x-frontend.topics.topic-actions :topic="$topic"/>
+        @endif
 
-        <x-frontend.topics.about-topic :topic="$topic" />
+        <x-frontend.topics.about-topic :topic="$topic"/>
 
-        <x-frontend.topics.related-topics />
+        <x-frontend.topics.related-topics :relatedTopics="$relatedTopics" />
     </div>
 </div>
 
