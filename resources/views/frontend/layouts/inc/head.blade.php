@@ -2,9 +2,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
-    <link href="{{ asset('favicon_package/favicon.ico')}}" rel="icon" >
-
     <!-- Basic Page Needs
         ================================================== -->
     <title>{{ config('app.name') }}</title>
