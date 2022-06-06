@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use BeyondCode\Comments\Contracts\Commentator;
+use BeyondCode\Comments\Traits\CanComment;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
@@ -68,10 +70,14 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Query\Builder|User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  * @mixin \Eloquent
+ * @property-read Collection|\App\Models\Topic[] $myTopic
+ * @property-read int|null $my_topic_count
+ * @property-read Collection|\App\Models\Topic[] $topics
+ * @property-read int|null $topics_count
  */
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements HasMedia, Commentator
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment;
 
     /**
      * The attributes that are mass assignable.
@@ -140,5 +146,11 @@ class User extends Authenticatable implements HasMedia
     {
         $this->addMediaCollection('avatar')
             ->singleFile();
+    }
+
+
+    public function needsCommentApproval($model): bool
+    {
+        return false;
     }
 }
