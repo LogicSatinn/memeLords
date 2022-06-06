@@ -10,15 +10,18 @@ use Illuminate\Support\Facades\Route;
 require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
+   return 'add something here muhfuckaaa';
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::post('/post/{post}/add-comment', [PostController::class, 'comment'])
+    ->name('addComment');
+
 Route::resource('posts', PostController::class)
-    ->only(['index', 'store', 'update', 'destroy']);
+    ->except('create', 'edit');
 
 Route::any('/topics/{topic}/join-topic', [TopicController::class, 'joinTopic'])
     ->name('joinTopic');
@@ -32,3 +35,5 @@ Route::resource('profile', UserController::class)
 
 Route::resource('categories', CategoryController::class)
     ->except('create', 'show', 'edit');
+
+//Route::view('/show', 'frontend.feed.show');
