@@ -50,6 +50,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Query\Builder|Topic withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Topic withoutTrashed()
  * @mixin \Eloquent
+ * @property-read Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \App\Models\User|null $owner
+ * @property-read Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
  */
 class Topic extends Model implements HasMedia
 {

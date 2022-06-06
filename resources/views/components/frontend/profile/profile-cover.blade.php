@@ -67,7 +67,6 @@
 
             <!-- more icon -->
             <a href="#" class="flex items-center justify-center h-10 w-10 rounded-md bg-gray-100">
-                {{--                <ion-icon name="ellipsis-horizontal" class="text-xl"></ion-icon>--}}
                 <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i>
             </a>
             <!-- more drowpdown -->

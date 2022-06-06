@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class PostController extends Controller
@@ -18,10 +19,10 @@ class PostController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        return view('frontend.feed', [
-            'posts' => Post::with('media', 'user')->get()
+        return view('frontend.feed.index', [
+            'posts' => Post::with('media', 'user', 'comments.commentator')->get(),
         ]);
     }
 
@@ -60,17 +61,21 @@ class PostController extends Controller
 
         return redirect(route('posts.index'));
     }
-//
-//    /**
-//     * Display the specified resource.
-//     *
-//     * @param Post $post
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function show(Post $post)
-//    {
-//        //
-//    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Post $post
+     * @return Application|Factory|View
+     */
+    public function show(Post $post)
+    {
+        return view('frontend.feed.show', [
+            'post' => $post,
+            'user' => $post->user,
+            'comments' => $post->comments,
+        ]);
+    }
 //
 //    /**
 //     * Show the form for editing the specified resource.
@@ -108,5 +113,21 @@ class PostController extends Controller
         $post->delete();
 
         return redirect(route('posts.index'));
+    }
+
+    /**
+     *  @param Post $post
+     *  @param Request $request
+     *  @return  Redirector|Application|RedirectResponse
+     */
+    public function comment(Request $request, Post $post): Redirector|Application|RedirectResponse
+    {
+        $validated = $request->validate([
+            'comment' => 'required|string|min:3|max:255',
+        ]);
+
+        $post->comment($validated['comment']);
+
+        return redirect(route('posts.show', [$post]));
     }
 }
