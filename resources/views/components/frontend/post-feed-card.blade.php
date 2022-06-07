@@ -29,12 +29,8 @@
                     <x-slot:form>
                         @method('DELETE')
                         <x-frontend.post-dropdown-link uk-toggle="target: #edit-post-modal{{$post->id}}">
-                            <i class="uil-edit-alt mr-2"></i> Edit Post
+                            <i class="uil-edit-alt mr-2"></i> Edit Post's title
                         </x-frontend.post-dropdown-link>
-
-                        {{--            <x-frontend.post-dropdown-link href="#">--}}
-                        {{--                <i class="uil-favorite mr-2"></i> Add favorites--}}
-                        {{--            </x-frontend.post-dropdown-link>--}}
 
                         <x-frontend.post-dropdown-link href="{{ route('posts.destroy', $post) }}"
                                                        onclick="event.preventDefault(); document.getElementById('deletePost').submit();">
@@ -55,7 +51,7 @@
     {{-- Edit video modal --}}
     <x-frontend.post-modal id="edit-post-modal{{$post->id}}">
 
-        <x-frontend.modal-header :title="'Edit Post'"/>
+        <x-frontend.modal-header :title="'Edit this Post\'s title'"/>
 
         <x-frontend.form-section action="{{ route('posts.update', $post) }}" enctype="multipart/form-data">
             <x-slot:form>

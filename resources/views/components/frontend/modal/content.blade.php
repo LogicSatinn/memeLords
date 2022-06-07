@@ -28,11 +28,11 @@
     <div class="flex space-x-2">
         <button type="submit"
                 class="bg-blue-600 flex h-9 items-center justify-center rounded-md text-white px-5 font-medium">
-            Share
+            Save
         </button>
     </div>
 
     <a href="#" hidden
        class="bg-blue-600 flex h-9 items-center justify-center rounded-lg text-white px-12 font-semibold">
-        Share </a>
+        Save </a>
 </div>

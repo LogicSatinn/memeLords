@@ -11,6 +11,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use PHPUnit\Exception;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class PostController extends Controller
 {
@@ -22,19 +25,10 @@ class PostController extends Controller
     public function index(): View|Factory|Application
     {
         return view('frontend.feed.index', [
-            'posts' => Post::with('media', 'user', 'comments.commentator')->get(),
+            'posts' => Post::with('media', 'user', 'comments.commentator')->inRandomOrder()->get(),
         ]);
     }
 
-//    /**
-//     * Show the form for creating a new resource.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function create()
-//    {
-//        //
-//    }
 
     /**
      * Store a newly created resource in storage.
@@ -44,22 +38,35 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = Post::create($request->validated());
+        try {
+            $post = Post::create($request->validated());
 
-        if ($request->has('image')) {
-            $post->addMediaFromRequest('image')
-                ->toMediaCollection('post');
+            if ($request->has('image')) {
+                $post->addMediaFromRequest('image')
+                    ->toMediaCollection('post');
+            }
+
+            if ($request->has('clip')) {
+                $post->addMediaFromRequest('clip')
+                    ->toMediaCollection('post');
+            }
+
+            $post->user_id = auth()->id();
+            $post->save();
+
+            toast('Post was saved successfully.', 'success');
+
+            return redirect(route('posts.index'));
+        } catch (FileIsTooBig $e) {
+            toast('The file is too big. Please try uploading a smaller one.', 'error');
+
+            return redirect(route('posts.index'));
+        } catch (\Exception $e) {
+            toast('Something went terribly wrong. Please try again later.', 'error');
+
+            return redirect(route('posts.index'));
         }
 
-        if ($request->has('clip')) {
-            $post->addMediaFromRequest('clip')
-                ->toMediaCollection('post');
-        }
-
-        $post->user_id = auth()->id();
-        $post->save();
-
-        return redirect(route('posts.index'));
     }
 
     /**
@@ -76,17 +83,7 @@ class PostController extends Controller
             'comments' => $post->comments,
         ]);
     }
-//
-//    /**
-//     * Show the form for editing the specified resource.
-//     *
-//     * @param Post $post
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function edit(Post $post)
-//    {
-//        //
-//    }
+
 
     /**
      * Update the specified resource in storage.
@@ -99,6 +96,8 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
+        toast('Post updated successfully.', 'success');
+
         return redirect(route('posts.index'));
     }
 
@@ -110,15 +109,24 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        try {
+            $post->delete();
 
-        return redirect(route('posts.index'));
+            toast('Post deleted successfully.', 'success');
+
+            return redirect(route('posts.index'));
+        } catch (\Exception $e) {
+            toast('Something went totally wrong. We\'ll fix that for yah!', 'error');
+
+            return back();
+        }
+
     }
 
     /**
-     *  @param Post $post
-     *  @param Request $request
-     *  @return  Redirector|Application|RedirectResponse
+     * @param Post $post
+     * @param Request $request
+     * @return  Redirector|Application|RedirectResponse
      */
     public function comment(Request $request, Post $post): Redirector|Application|RedirectResponse
     {

@@ -30,10 +30,13 @@ Route::middleware(['auth'])->group(function () {
         ]);
 });
 
-Route::resource('categories', CategoryController::class)
-    ->except('create', 'show', 'edit');
+Route::middleware(['auth', 'can:access dashboard'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth'])->name('dashboard');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    Route::resource('categories', CategoryController::class)
+        ->except('create', 'show', 'edit');
+});
+

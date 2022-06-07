@@ -26,6 +26,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\Models\User
@@ -77,7 +78,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class User extends Authenticatable implements HasMedia, Commentator
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, HasRoles;
 
     /**
      * The attributes that are mass assignable.
