@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "content-hash": "50eaebb41d8ff9ce22144306750f5a38",
+
     "packages": [
         {
             "name": "beyondcode/laravel-comments",

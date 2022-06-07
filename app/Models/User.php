@@ -80,6 +80,7 @@ class User extends Authenticatable implements HasMedia, Commentator
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, HasRoles;
 
+
     /**
      * The attributes that are mass assignable.
      *

@@ -10,11 +10,13 @@
 
                 <div id="logo">
                     <a href="{{ url('/posts') }}">
+
                         <img src="{{ asset('logo/default-monochrome-black.svg')}}" alt="">
                         <img src="{{ asset('logo/default-monochrome-black.svg')}}" class="logo_mobile" alt="">
                     </a>
                 </div>
             </div>
+
 
             <div class="right_side">
 

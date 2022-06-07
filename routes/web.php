@@ -19,10 +19,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class)
         ->except('create', 'edit');
 
+
     Route::any('/topics/{topic}/join-topic', [TopicController::class, 'joinTopic'])
         ->name('joinTopic');
 
     Route::resource('topics', TopicController::class);
+
 
     Route::resource('profile', UserController::class)
         ->parameters([

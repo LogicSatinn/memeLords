@@ -8,6 +8,7 @@
 
         <x-frontend.modal-header :title="'Create a Post'"/>
 
+
         <x-frontend.form-section action="{{ route('posts.store') }}" enctype="multipart/form-data">
             <x-slot:form>
                 <x-frontend.modal.content>
