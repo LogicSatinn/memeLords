@@ -139,20 +139,4 @@ class PostController extends Controller
 
         return redirect(route('posts.show', [$post]));
     }
-
-    /**
-     *  @param Post $post
-     *  @param Request $request
-     *  @return  Redirector|Application|RedirectResponse
-     */
-    public function comment(Request $request, Post $post): Redirector|Application|RedirectResponse
-    {
-        $validated = $request->validate([
-            'comment' => 'required|string|min:3|max:255',
-        ]);
-
-        $post->comment($validated['comment']);
-
-        return redirect(route('posts.show', [$post]));
-    }
 }
