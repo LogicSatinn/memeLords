@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function __invoke(): Factory|View|Application
     {
         return view('frontend.home', [
-            'posts' => Post::with('media', 'user')->take(5)->get(),
+            'posts' => Post::with('media', 'user', 'comments.commentator')->take(5)->get(),
         ]);
     }
 }

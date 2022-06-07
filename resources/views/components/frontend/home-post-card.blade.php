@@ -46,16 +46,22 @@
 
     <x-frontend.post-feed-media :post="$post"/>
 
-    <div class="p-4 space-y-3">
+    @auth
+        <x-frontend.post-comments :post="$post" :comments="$post->comments->slice(0, 2)"/>
+    @endauth
 
-        <div class="flex space-x-4 lg:font-bold">
-        </div>
+    @guest
+        <div class="p-4 space-y-3">
 
-        <div class="border-t py-4 space-y-4 dark:border-gray-600">
-        </div>
+            <div class="flex space-x-4 lg:font-bold">
+            </div>
 
-        <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
+            <div class="border-t py-4 space-y-4 dark:border-gray-600">
+            </div>
+
+            <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
+            </div>
         </div>
-    </div>
+    @endguest
 
 </div>
