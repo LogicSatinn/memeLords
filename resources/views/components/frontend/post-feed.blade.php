@@ -66,7 +66,7 @@
         @endforeach
 
 
-        <x-frontend.load-more/>
+{{--        <x-frontend.load-more/>--}}
     </div>
 
 {{--    <x-frontend.side-panel/>--}}

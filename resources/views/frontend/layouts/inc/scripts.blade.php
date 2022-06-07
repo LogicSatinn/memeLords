@@ -1,4 +1,5 @@
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}" defer></script>
+<script src="{{ mix('js/tw-elements.js') }}" defer></script>
 
 <!-- For Night mode -->
 <script>

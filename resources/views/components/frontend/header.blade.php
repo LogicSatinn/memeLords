@@ -16,50 +16,6 @@
                 </div>
             </div>
 
-            <!-- search icon for mobile -->
-{{--            <div class="header-search-icon" uk-toggle="target: #wrapper ; cls: show-searchbox"></div>--}}
-{{--            <div class="header_search"><i class="uil-search-alt"></i>--}}
-{{--                <input value="" type="text" class="form-control" placeholder="Search for Friends , Videos and more.."--}}
-{{--                       autocomplete="off">--}}
-{{--                <div uk-drop="mode: click" class="header_search_dropdown">--}}
-
-{{--                    <h4 class="search_title"> Recently </h4>--}}
-{{--                    <ul>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">--}}
-{{--                                <img src="{{ asset('assets/images/avatars/avatar-1.jpg')}}" alt="" class="list-avatar">--}}
-{{--                                <div class="list-name"> Erica Jones</div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">--}}
-{{--                                <img src="{{ asset('assets/images/avatars/avatar-2.jpg')}}" alt="" class="list-avatar">--}}
-{{--                                <div class="list-name"> Coffee Addicts</div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">--}}
-{{--                                <img src="{{ asset('assets/images/avatars/avatar-3.jpg')}}" alt="" class="list-avatar">--}}
-{{--                                <div class="list-name"> Mountain Riders</div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">--}}
-{{--                                <img src="{{ asset('assets/images/avatars/avatar-4.jpg')}}" alt="" class="list-avatar">--}}
-{{--                                <div class="list-name"> Property Rent And Sale</div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#">--}}
-{{--                                <img src="{{ asset('assets/images/avatars/avatar-5.jpg')}}" alt="" class="list-avatar">--}}
-{{--                                <div class="list-name"> Erica Jones</div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-
             <div class="right_side">
 
                 <div class="header_widgets">
