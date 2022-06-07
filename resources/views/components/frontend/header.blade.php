@@ -72,62 +72,6 @@
                         </div>
                     @endguest
 
-                    <a href="#" class="is_icon" uk-tooltip="title: Notifications">
-                        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
-                        </svg>
-                        <span>3</span>
-                    </a>
-                    <div uk-drop="mode: click" class="header_dropdown">
-                        <div class="dropdown_scrollbar" data-simplebar>
-                            <div class="drop_headline">
-                                <h4>Notifications </h4>
-                                <div class="btn_action">
-                                    <a href="#" data-tippy-placement="left" title="Notifications">
-                                        <ion-icon name="settings-outline"></ion-icon>
-                                    </a>
-                                    <a href="#" data-tippy-placement="left" title="Mark as read all">
-                                        <ion-icon name="checkbox-outline"></ion-icon>
-                                    </a>
-                                </div>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <div class="drop_avatar">
-                                            <img src="{{ asset('assets/images/avatars/avatar-1.jpg')}}" alt="">
-                                        </div>
-                                        <span class="drop_icon bg-gradient-primary">
-                                                     <i class="icon-feather-thumbs-up"></i>
-                                                 </span>
-                                        <div class="drop_text">
-                                            <p>
-                                                <strong>Adrian Mohani</strong> Like Your Comment On Video
-                                                <span class="text-link">Learn Prototype Faster </span>
-                                            </p>
-                                            <time> 2 hours ago</time>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="not-read">
-                                    <a href="#">
-                                        <div class="drop_avatar status-online"><img
-                                                src="{{ asset('assets/images/avatars/avatar-2.jpg')}}" alt="">
-                                        </div>
-                                        <div class="drop_text">
-                                            <p>
-                                                <strong>Stella Johnson</strong> Replay Your Comments in
-                                                <span class="text-link">Adobe XD Tutorial</span>
-                                            </p>
-                                            <time> 9 hours ago</time>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <a href="#">
                         @auth
                             @if(auth()->user()->getMedia('avatar')->count() === 0)
