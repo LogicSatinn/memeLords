@@ -66,13 +66,12 @@ class Topic extends Model implements HasMedia
 
 
     protected $fillable = [
-        'name', 'visibility', 'description'
+        'name', 'description'
     ];
 
 
     protected $casts = [
         'name' => 'string',
-        'visibility' => 'string',
         'description' => 'string'
     ];
 

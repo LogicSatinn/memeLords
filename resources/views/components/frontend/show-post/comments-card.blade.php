@@ -1,7 +1,7 @@
 @props(['post'])
 
 <div class="card p-6">
-    <h1 class="block text-lg font-semibold mb-4"> Comments (12) </h1>
+    <h1 class="block text-lg font-semibold mb-4"> Comments ({{ $post->comments->count() }}) </h1>
     <div class="space-y-5">
         {{ $slot }}
     </div>
