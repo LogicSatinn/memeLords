@@ -26,7 +26,6 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string('visibility');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -8,12 +8,14 @@
                     class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
                 >
                     <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                        class="w-full"
-                        alt="Sample image"
+                        src="{{ asset('images/raoul-droog-yMSecCHsIBc-unsplash.jpg') }}"
+                        class="w-100 mx-auto h-100"
+                        alt="Phone image"
                     />
                 </div>
                 <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+
+                    <x-application-logo class="mb-5"/>
 
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors"/>

@@ -54,22 +54,35 @@ class TopicController extends Controller
      */
     public function store(StoreTopicRequest $request)
     {
-        $topic = Topic::create($request->validated());
+        try {
+            $topic = Topic::create($request->validated());
 
-        if ($request->has('cover_image')) {
-            $topic->addMediaFromRequest('cover_image')
-                ->toMediaCollection('topics');
+            if ($request->has('cover_image')) {
+                $topic->addMediaFromRequest('cover_image')
+                    ->toMediaCollection('topics');
+            }
+
+            $topic->owner()
+                ->associate(auth()->user())
+                ->save();
+
+            $topic->users()->attach(auth()->id());
+
+            $topic->categories()->attach($request['category']);
+
+            toast('Topic saved successfully', 'success');
+
+            return redirect(route('topics.index'));
+        } catch (FileDoesNotExist $e) {
+            toast('Something went totally wrong. We\'ll fix that for yah!', 'error');
+
+            return redirect(route('topics.index'));
+        } catch (FileIsTooBig $e) {
+            toast('The file you uploaded is too big. Please try uploading a smaller one!', 'error');
+
+            return redirect(route('topics.index'));
         }
 
-        $topic->owner()
-            ->associate(auth()->user())
-            ->save();
-
-        $topic->users()->attach(auth()->id());
-
-        $topic->categories()->attach($request['category']);
-
-        return redirect(route('topics.index'));
     }
 
     /**
@@ -115,20 +128,29 @@ class TopicController extends Controller
      */
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
-        $topic->update($request->validated());
+        try {
+            $topic->update($request->validated());
 
-        if ($request->has('cover_image')) {
-            try {
-                $topic->addMediaFromRequest('cover_image')
-                    ->toMediaCollection('topics');
-            } catch (FileDoesNotExist|FileIsTooBig $e) {
-                return back();
+            if ($request->has('cover_image')) {
+                try {
+                    $topic->addMediaFromRequest('cover_image')
+                        ->toMediaCollection('topics');
+                } catch (FileDoesNotExist|FileIsTooBig $e) {
+                    return back();
+                }
             }
+
+            $topic->categories()->sync($request['category']);
+
+            toast('Topic updated successfully', 'success');
+
+            return redirect(route('topics.index'));
+        } catch (\Exception $exception) {
+            toast('Something went totally wrong. We\'ll fix that for yah!', 'error');
+
+            return back();
         }
 
-        $topic->categories()->sync($request['category']);
-
-        return redirect(route('topics.index'));
     }
 
     /**
@@ -139,9 +161,18 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic)
     {
-        $topic->delete();
+        try {
+            $topic->delete();
 
-        return redirect(route('topics.index'));
+            toast('Topic deleted successfully', 'success');
+
+            return redirect(route('topics.index'));
+        } catch (\Exception $e) {
+            toast('Something went totally wrong. We\'ll fix that for yah!', 'error');
+
+            return back();
+        }
+
     }
 
 
@@ -150,6 +181,8 @@ class TopicController extends Controller
         if (!$topic->users()->whereId(auth()->id())->exists()) {
             $topic->users()->attach(auth()->id());
         }
+
+        toast('Successfully joined the topic', 'success');
 
         return back();
     }

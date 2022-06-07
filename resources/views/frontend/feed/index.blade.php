@@ -6,7 +6,8 @@
     {{-- Create Image modal --}}
     <x-frontend.post-modal id="create-image-modal">
 
-            <x-frontend.modal-header :title="'Create a Post'"/>
+        <x-frontend.modal-header :title="'Create a Post'"/>
+
 
         <x-frontend.form-section action="{{ route('posts.store') }}" enctype="multipart/form-data">
             <x-slot:form>
