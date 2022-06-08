@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TopicController;
@@ -26,10 +27,23 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('topics', TopicController::class);
 
 
+    Route::get('/my-profile', [UserController::class, 'myProfile'])
+        ->name('myProfile');
+
     Route::resource('profile', UserController::class)
         ->parameters([
             'profile' => 'user'
         ]);
+
+
+    Route::get('/send-friend-request/{user}', [FriendsController::class, 'processFriendRequest'])
+        ->name('sendFriendRequest');
+
+    Route::get('/accept-friend-request/{user}', [FriendsController::class, 'acceptFriendRequest'])
+        ->name('acceptFriendRequest');
+
+    Route::get('/deny-friend-request/{user}', [FriendsController::class, 'denyFriendRequest'])
+        ->name('denyFriendRequest');
 });
 
 Route::middleware(['auth', 'can:access dashboard'])->group(function () {
@@ -42,3 +56,12 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
         ->except('create', 'show', 'edit');
 });
 
+
+Route::get('/test', function () {
+//    dd(auth()->user()->getAllFriendships());
+//    dd(auth()->user()->getFriends());
+    dd(auth()->id());
+});
+
+
+Route::view('/friends', 'frontend.friends.index');

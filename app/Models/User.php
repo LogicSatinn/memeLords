@@ -22,6 +22,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use Multicaret\Acquaintances\Traits\Friendable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
@@ -78,8 +79,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements HasMedia, Commentator
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, HasRoles;
-
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, Friendable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

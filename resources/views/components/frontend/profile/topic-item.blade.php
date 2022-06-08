@@ -1,11 +1,11 @@
 @props(['topic'])
 
 <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-    <a href="timeline-group.html" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
+    <a href="{{ route('topics.show', $topic) }}" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
         <img src="{{ asset($topic->getFirstMediaUrl('topics'))}}" class="absolute w-full h-full inset-0 " alt="">
     </a>
     <div class="flex-1">
-        <a href="timeline-page.html" class="text-base font-semibold capitalize"> {{ $topic->name }} </a>
+        <a href="{{ route('topics.show', $topic) }}" class="text-base font-semibold capitalize"> {{ $topic->name }} </a>
         <div class="text-sm text-gray-500 mt-0.5"> {{ $topic->count() }} Following</div>
     </div>
 

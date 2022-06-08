@@ -1,4 +1,4 @@
-@props(['topics'])
+@props(['topics', 'friends'])
 
 <div class="w-full space-y-6">
 
@@ -8,4 +8,10 @@
         @endforeach
     </x-frontend.profile.associated-topics>
 
+{{--    Friends--}}
+    <x-frontend.profile.associated-friends>
+        @foreach($friends as $user)
+            <x-frontend.profile.friends-item :user="$user"/>
+        @endforeach
+    </x-frontend.profile.associated-friends>
 </div>
