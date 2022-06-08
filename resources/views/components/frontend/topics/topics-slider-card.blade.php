@@ -4,8 +4,14 @@
     <div class="card">
         <div class="card-media h-28">
             <div class="card-media-overly"></div>
-            <img src="{{ asset($topic->getFirstMediaUrl('topics'))}}" alt="{{ $topic->name }}" class="">
-
+{{--            <img src="{{ asset($topic->getFirstMediaUrl('topics'))}}" alt="{{ $topic->name }}" class="">--}}
+            @if($topic->getMedia('topics')->count() === 0)
+                <img src="{{ asset('avatar.webp')}}"
+                     class="" alt="{{ $topic->name }}">
+            @else
+                <img src="{{ asset($topic->getFirstMediaUrl('topics'))}}"
+                     class="" alt="{{ $topic->name }}">
+            @endif
             <div
                 class="absolute bg-red-100 font-semibold px-2.5 py-1 rounded-lg text-red-500 text-xs top-2.5 left-2.5">
                 Trend
