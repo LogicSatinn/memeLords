@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FriendsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
@@ -27,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/my-profile', [UserController::class, 'myProfile'])
-->name('myProfile');
+        ->name('myProfile');
 
     Route::resource('profile', UserController::class)
         ->parameters([
@@ -35,14 +36,14 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
 
-        Route::get('/send-friend-request/{user}', [FriendsController::class, 'processFriendRequest'])
-->name('sendFriendRequest');
+    Route::get('/send-friend-request/{user}', [FriendsController::class, 'processFriendRequest'])
+        ->name('sendFriendRequest');
 
-Route::get('/accept-friend-request/{user}', [FriendsController::class, 'acceptFriendRequest'])
-->name('acceptFriendRequest');
+    Route::get('/accept-friend-request/{user}', [FriendsController::class, 'acceptFriendRequest'])
+        ->name('acceptFriendRequest');
 
-Route::get('/deny-friend-request/{user}', [FriendsController::class, 'denyFriendRequest'])
-->name('denyFriendRequest');
+    Route::get('/deny-friend-request/{user}', [FriendsController::class, 'denyFriendRequest'])
+        ->name('denyFriendRequest');
 });
 
 Route::middleware(['auth', 'can:access dashboard'])->group(function () {
@@ -54,7 +55,6 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
     Route::resource('categories', CategoryController::class)
         ->except('create', 'show', 'edit');
 });
-
 
 
 Route::get('/test', function () {
