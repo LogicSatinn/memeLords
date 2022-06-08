@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class UserController extends Controller
 {
@@ -89,16 +92,29 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        if ($request->filled(['name', 'username', 'email'])) {
-            $user->update($request->validated());
+        try {
+            if ($request->filled(['name', 'username', 'email'])) {
+                $user->update($request->validated());
+            }
+
+            if ($request->has('avatar')) {
+                $user->addMediaFromRequest('avatar')
+                    ->toMediaCollection('avatar');
+            }
+
+            toast('Profile saved successfully', 'success');
+
+            return redirect(route('profile.show', [$user]));
+        } catch (FileDoesNotExist $e) {
+            toast('Something went totally wrong. We\'ll fix that for yah!', 'error');
+
+            return redirect(route('profile.show', [$user]));
+        } catch (FileIsTooBig $e) {
+            toast('The file you uploaded is too big. Please try uploading a smaller one!', 'error');
+
+            return redirect(route('profile.show', [$user]));
         }
 
-        if ($request->has('avatar')) {
-            $user->addMediaFromRequest('avatar')
-                ->toMediaCollection('avatar');
-        }
-
-        return redirect(route('profile.show', [$user]));
     }
 
     /**
@@ -109,8 +125,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        try {
+            $user->delete();
 
-        return redirect('/');
+            return redirect('/');
+        } catch (Exception $e) {
+            toast('Something went totally wrong. We\'ll fix that for yah!', 'error');
+
+            return back();
+        }
     }
 }

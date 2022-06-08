@@ -10,37 +10,32 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
-Route::get('/', function () {
-   return 'add something here muhfuckaaa';
-});
+Route::get('/', HomeController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/post/{post}/add-comment', [PostController::class, 'comment'])
+        ->name('addComment');
 
-Route::post('/post/{post}/add-comment', [PostController::class, 'comment'])
-    ->name('addComment');
+    Route::resource('posts', PostController::class)
+        ->except('create', 'edit');
 
-Route::resource('posts', PostController::class)
-    ->except('create', 'edit');
 
-Route::any('/topics/{topic}/join-topic', [TopicController::class, 'joinTopic'])
-    ->name('joinTopic');
+    Route::any('/topics/{topic}/join-topic', [TopicController::class, 'joinTopic'])
+        ->name('joinTopic');
 
-Route::resource('topics', TopicController::class);
+    Route::resource('topics', TopicController::class);
 
-Route::get('/my-profile', [UserController::class, 'myProfile'])
+
+    Route::get('/my-profile', [UserController::class, 'myProfile'])
 ->name('myProfile');
 
-Route::resource('profile', UserController::class)
-    ->parameters([
-        'profile' => 'user'
-    ]);
+    Route::resource('profile', UserController::class)
+        ->parameters([
+            'profile' => 'user'
+        ]);
 
-Route::resource('categories', CategoryController::class)
-    ->except('create', 'show', 'edit');
 
-Route::get('/send-friend-request/{user}', [FriendsController::class, 'processFriendRequest'])
+        Route::get('/send-friend-request/{user}', [FriendsController::class, 'processFriendRequest'])
 ->name('sendFriendRequest');
 
 Route::get('/accept-friend-request/{user}', [FriendsController::class, 'acceptFriendRequest'])
@@ -48,6 +43,19 @@ Route::get('/accept-friend-request/{user}', [FriendsController::class, 'acceptFr
 
 Route::get('/deny-friend-request/{user}', [FriendsController::class, 'denyFriendRequest'])
 ->name('denyFriendRequest');
+});
+
+Route::middleware(['auth', 'can:access dashboard'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth'])->name('dashboard');
+
+
+    Route::resource('categories', CategoryController::class)
+        ->except('create', 'show', 'edit');
+});
+
+
 
 Route::get('/test', function () {
 //    dd(auth()->user()->getAllFriendships());

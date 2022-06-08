@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use BeyondCode\Comments\Comment;
 use BeyondCode\Comments\Traits\HasComments;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -48,7 +50,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Query\Builder|Post withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Post withoutTrashed()
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\BeyondCode\Comments\Comment[] $comments
+ * @property-read Collection|Comment[] $comments
  * @property-read int|null $comments_count
  */
 class Post extends Model implements HasMedia
@@ -56,14 +58,13 @@ class Post extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia, HasComments;
 
     protected $fillable = [
-        'title', 'user_id', 'topic_id', 'visibility'
+        'title', 'user_id', 'topic_id',
     ];
 
     protected $casts = [
         'title' => 'string',
         'user_id' => 'integer',
         'topic_id' => 'integer',
-        'visibility' => 'string'
     ];
 
 

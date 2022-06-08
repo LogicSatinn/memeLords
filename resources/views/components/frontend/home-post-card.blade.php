@@ -15,9 +15,11 @@
                 @endif
             </a>
             <div class="flex-1 font-semibold capitalize">
-                <a href="{{ route('profile.show', $post->user) }}" class="text-black dark:text-gray-100"> {{ $post->user->username }} </a>
+                <a href="{{ route('profile.show', $post->user) }}"
+                   class="text-black dark:text-gray-100"> {{ $post->user->username }} </a>
                 <div class="text-gray-700 flex items-center space-x-2">
-                    <a href="{{ route('posts.show', $post) }}" class="text-black dark:text-gray-100">{{ $post->title }}</a>
+                    <a href="{{ route('posts.show', $post) }}"
+                       class="text-black dark:text-gray-100">{{ $post->title }}</a>
                     <ion-icon name="people"></ion-icon>
                 </div>
             </div>
@@ -29,7 +31,7 @@
                     <x-slot:form>
                         @method('DELETE')
                         <x-frontend.post-dropdown-link uk-toggle="target: #edit-post-modal{{$post->id}}">
-                            <i class="uil-edit-alt mr-2"></i> Edit Post's title
+                            <i class="uil-edit-alt mr-2"></i> Edit Post
                         </x-frontend.post-dropdown-link>
 
                         <x-frontend.post-dropdown-link href="{{ route('posts.destroy', $post) }}"
@@ -44,21 +46,22 @@
 
     <x-frontend.post-feed-media :post="$post"/>
 
+    @auth
+        <x-frontend.post-comments :post="$post" :comments="$post->comments->slice(0, 2)"/>
+    @endauth
 
-   <x-frontend.post-comments :post="$post" :comments="$post->comments->slice(0, 2)"/>
+    @guest
+        <div class="p-4 space-y-3">
 
+            <div class="flex space-x-4 lg:font-bold">
+            </div>
 
-    {{-- Edit video modal --}}
-    <x-frontend.post-modal id="edit-post-modal{{$post->id}}">
+            <div class="border-t py-4 space-y-4 dark:border-gray-600">
+            </div>
 
-        <x-frontend.modal-header :title="'Edit this Post\'s title'"/>
+            <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
+            </div>
+        </div>
+    @endguest
 
-        <x-frontend.form-section action="{{ route('posts.update', $post) }}" enctype="multipart/form-data">
-            <x-slot:form>
-                @method('PUT')
-                <x-frontend.modal.post-edit-modal :post="$post"/>
-            </x-slot:form>
-        </x-frontend.form-section>
-    </x-frontend.post-modal>
-    {{-- End Edit video modal --}}
 </div>

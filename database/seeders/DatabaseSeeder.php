@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +18,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         $user = User::create([
+             'name' => 'Super Admin',
+             'email' => 'admin@memelords.app',
+             'username' => 'admin',
+             'email_verified_at' => now(),
+             'password' => Hash::make('maliksonneli'),
+             'remember_token' => Str::random(10),
+         ]);
+
+        Permission::create(['name' => 'access dashboard']);
+
+        $user->givePermissionTo('access dashboard');
     }
 }
