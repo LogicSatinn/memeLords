@@ -59,7 +59,8 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
 Route::get('/test', function () {
 //    dd(auth()->user()->getAllFriendships());
-    dd(auth()->user()->getFriends());
+//    dd(auth()->user()->getFriends());
+    dd(auth()->id());
 });
 
 

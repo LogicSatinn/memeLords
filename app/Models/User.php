@@ -79,7 +79,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements HasMedia, Commentator
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, Friendable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, Friendable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

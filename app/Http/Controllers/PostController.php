@@ -51,8 +51,8 @@ class PostController extends Controller
                     ->toMediaCollection('post');
             }
 
-            $post->user_id = auth()->id();
-            $post->save();
+//            $post->user_id = auth()->id();
+//            $post->save();
 
             toast('Post was saved successfully.', 'success');
 
