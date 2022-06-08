@@ -55,26 +55,6 @@
                     @enderror
                 </div>
 
-
-                <div class="px-2 space-y-2">
-                    <label for="visibility" class="font-semibold text-base"> Choose Privacy </label>
-                    <div> Anyone can see who's in the group and what they post.</div>
-                    <select id="visibility" name="visibility" class="shadow-none selectpicker with-border">
-                        <option data-icon="uil-globe" value="Public" @selected(old('visibility') == $topic->visibility)>
-                            Public
-                        </option>
-                        <option data-icon="uil-bullseye"
-                                value="Private" @selected(old('visibility') == $topic->visibility)> Private
-                        </option>
-                        <option data-icon="uil-chat-bubble-user"
-                                value="Following" @selected(old('visibility') == $topic->visibility)>Following
-                        </option>
-                    </select>
-                    @error('visibility')
-                    <div class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
-                        {{ $message }}
-                    </div>
-                    @enderror
                 </div>
 
                 <div class="line h-32">

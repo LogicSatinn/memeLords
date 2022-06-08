@@ -3,7 +3,14 @@
 <div class="profile is_group">
 
     <div class="profiles_banner">
-        <img src="{{ asset($topic->getFirstMediaUrl('topics')) }}" alt="{{ $topic->name }}">
+{{--        <img src="{{ asset($topic->getFirstMediaUrl('topics')) }}" alt="{{ $topic->name }}">--}}
+        @if($topic->getMedia('topics')->count() === 0)
+            <img src="{{ asset('avatar.webp')}}"
+                 class="" alt="{{ $topic->name }}">
+        @else
+            <img src="{{ asset($topic->getFirstMediaUrl('topics'))}}"
+                 class="" alt="{{ $topic->name }}">
+        @endif
     </div>
     <div class="profiles_content">
 
