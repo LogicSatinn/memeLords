@@ -30,43 +30,47 @@
                         </div>
                     @endguest
 
-                    <a href="#" class="is_icon" uk-tooltip="title: Notifications">
-                        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
-                        </svg>
-                        <span>3</span>
-                    </a>
-                    <div uk-drop="mode: click" class="header_dropdown">
-                        <div class="dropdown_scrollbar" data-simplebar>
-                            <div class="drop_headline">
-                                <h4>Notifications </h4>
-                                <div class="btn_action">
-                                    <a href="#" data-tippy-placement="left" title="Notifications">
-                                        <ion-icon name="settings-outline"></ion-icon>
-                                    </a>
-                                    <a href="#" data-tippy-placement="left" title="Mark as read all">
-                                        <ion-icon name="checkbox-outline"></ion-icon>
-                                    </a>
+                    @auth
+                        <a href="#" class="is_icon" uk-tooltip="title: Notifications">
+                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                            </svg>
+                        </a>
+                        <div uk-drop="mode: click" class="header_dropdown">
+                            <div class="dropdown_scrollbar" data-simplebar>
+                                <div class="drop_headline">
+                                    <h4>Notifications </h4>
+                                    <div class="btn_action">
+                                        <a href="#" data-tippy-placement="left" title="Notifications">
+                                            <ion-icon name="settings-outline"></ion-icon>
+                                        </a>
+                                        <a href="#" data-tippy-placement="left" title="Mark as read all">
+                                            <ion-icon name="checkbox-outline"></ion-icon>
+                                        </a>
+                                    </div>
                                 </div>
+                                <ul>
+                                    @foreach(auth()->user()->getFriendRequests() as $friendRequest)
+                                        <li>
+                                            <a href="#">
+                                                <div class="drop_text">
+                                                    <p>
+                                                        {{ App\Models\User::whereId($friendRequest->sender_id)->first()->username }}
+                                                        sent you a friend request
+                                                        <a href="{{ route('acceptFriendRequest', App\Models\User::whereId($friendRequest->sender_id)->first()) }}"><span
+                                                                class="text-link text-blue-500">Accept Friend Request </span></a>
+                                                        <a href="{{ route('denyFriendRequest', App\Models\User::whereId($friendRequest->sender_id)->first()) }}"><span
+                                                                class="text-link text-red-500">Decline Friend Request </span></a>
+                                                    </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
-                            <ul>
-                                @foreach(auth()->user()->getFriendRequests() as $friendRequest)
-                                <li>
-                                    <a href="#">
-                                        <div class="drop_text">
-                                            <p>
-                                                {{ App\Models\User::whereId($friendRequest->sender_id)->first()->username }} sent you a friend request
-                                                <a href="{{ route('acceptFriendRequest', App\Models\User::whereId($friendRequest->sender_id)->first()) }}"><span class="text-link text-blue-500">Accept Friend Request </span></a>
-                                                <a href="{{ route('denyFriendRequest', App\Models\User::whereId($friendRequest->sender_id)->first()) }}"><span class="text-link text-red-500">Decline Friend Request </span></a>
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
                         </div>
-                    </div>
+                    @endauth
 
                     <a href="#">
                         @auth
