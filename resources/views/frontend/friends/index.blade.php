@@ -12,7 +12,7 @@
         </x-frontend.friends.main-section>
 
 
-        <x-frontend.friends.friends-side-bar/>
+{{--        <x-frontend.friends.friends-side-bar/>--}}
 
     </div>
 </x-master-layout>
