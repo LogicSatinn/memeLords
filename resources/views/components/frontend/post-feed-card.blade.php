@@ -32,10 +32,6 @@
                             <i class="uil-edit-alt mr-2"></i> Edit Post
                         </x-frontend.post-dropdown-link>
 
-                        {{--            <x-frontend.post-dropdown-link href="#">--}}
-                        {{--                <i class="uil-favorite mr-2"></i> Add favorites--}}
-                        {{--            </x-frontend.post-dropdown-link>--}}
-
                         <x-frontend.post-dropdown-link href="{{ route('posts.destroy', $post) }}"
                                                        onclick="event.preventDefault(); document.getElementById('deletePost').submit();">
                             <i class="uil-trash-alt mr-2"></i> Delete

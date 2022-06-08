@@ -18,12 +18,10 @@
                     <x-frontend.post-feed-card :post="$post"/>
                 @endforeach
 
-                <x-frontend.load-more/>
-
             </div>
 
             <!-- Sidebar -->
-            <x-frontend.profile.profile-sidebar :topics="$topics"/>
+            <x-frontend.profile.profile-sidebar :friends="$friends" :topics="$topics"/>
         </div>
 
     </div>

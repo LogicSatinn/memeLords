@@ -52,9 +52,20 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('frontend.profile', compact('user'), [
+        return view('frontend.profile.index', compact('user'), [
             'posts' => $user->posts,
-            'topics' => $user->topics
+            'topics' => $user->topics,
+            'friends' => $user->getFriends()
+        ]);
+    }
+
+
+    public function myProfile()
+    {
+        return view('frontend.profile.profile', [
+            'posts' => auth()->user()->posts,
+            'topics' => auth()->user()->topics,
+            'friends' => auth()->user()->getFriends()
         ]);
     }
 

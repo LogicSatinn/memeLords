@@ -2,18 +2,7 @@
 
     <div class="profiles_banner">
         <img src="{{ asset('assets/images/avatars/profile-cover.jpg')}}" alt="">
-        <div class="profile_action absolute bottom-0 right-0 space-x-1.5 p-3 text-sm z-50 hidden lg:flex">
-            <a href="#"
-               class="flex items-center justify-center h-8 px-3 rounded-md bg-gray-700 bg-opacity-70 text-white space-x-1.5">
-                <ion-icon name="crop-outline" class="text-xl"></ion-icon>
-                <span> Crop  </span>
-            </a>
-            <a href="#"
-               class="flex items-center justify-center h-8 px-3 rounded-md bg-gray-700 bg-opacity-70 text-white space-x-1.5">
-                <ion-icon name="create-outline" class="text-xl"></ion-icon>
-                <span> Edit </span>
-            </a>
-        </div>
+
     </div>
     <div class="profiles_content">
 
