@@ -76,6 +76,16 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $my_topic_count
  * @property-read Collection|\App\Models\Topic[] $topics
  * @property-read int|null $topics_count
+ * @property-read Collection|\Multicaret\Acquaintances\Models\Friendship[] $friends
+ * @property-read int|null $friends_count
+ * @property-read Collection|\Multicaret\Acquaintances\Models\FriendFriendshipGroups[] $groups
+ * @property-read int|null $groups_count
+ * @property-read Collection|\Spatie\Permission\Models\Permission[] $permissions
+ * @property-read int|null $permissions_count
+ * @property-read Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @method static Builder|User permission($permissions)
+ * @method static Builder|User role($roles, $guard = null)
  */
 class User extends Authenticatable implements HasMedia, Commentator
 {
