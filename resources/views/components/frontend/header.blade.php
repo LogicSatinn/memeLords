@@ -30,6 +30,44 @@
                         </div>
                     @endguest
 
+                    <a href="#" class="is_icon" uk-tooltip="title: Notifications">
+                        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                        </svg>
+                        <span>3</span>
+                    </a>
+                    <div uk-drop="mode: click" class="header_dropdown">
+                        <div class="dropdown_scrollbar" data-simplebar>
+                            <div class="drop_headline">
+                                <h4>Notifications </h4>
+                                <div class="btn_action">
+                                    <a href="#" data-tippy-placement="left" title="Notifications">
+                                        <ion-icon name="settings-outline"></ion-icon>
+                                    </a>
+                                    <a href="#" data-tippy-placement="left" title="Mark as read all">
+                                        <ion-icon name="checkbox-outline"></ion-icon>
+                                    </a>
+                                </div>
+                            </div>
+                            <ul>
+                                @foreach(auth()->user()->getFriendRequests() as $friendRequest)
+                                <li>
+                                    <a href="#">
+                                        <div class="drop_text">
+                                            <p>
+                                                {{ App\Models\User::whereId($friendRequest->sender_id)->first()->username }} sent you a friend request
+                                                <a href="{{ route('acceptFriendRequest', App\Models\User::whereId($friendRequest->sender_id)->first()) }}"><span class="text-link text-blue-500">Accept Friend Request </span></a>
+                                                <a href="{{ route('denyFriendRequest', App\Models\User::whereId($friendRequest->sender_id)->first()) }}"><span class="text-link text-red-500">Decline Friend Request </span></a>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
                     <a href="#">
                         @auth
                             @if(auth()->user()->getMedia('avatar')->count() === 0)
@@ -61,7 +99,7 @@
                         </div>
                         <hr>
                         @auth
-                            <a href="{{ route('profile.show', auth()->user()) }}">
+                            <a href="{{ route('myProfile') }}">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                           d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"

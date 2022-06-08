@@ -17,6 +17,7 @@
             {{ $message }}
         </div>
         @enderror
+        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
     </div>
 
 </div>
