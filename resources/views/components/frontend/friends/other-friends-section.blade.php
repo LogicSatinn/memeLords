@@ -1,10 +1,10 @@
-@props(['friends'])
+@props(['otherFriends'])
 
 <div class="relative" uk-slider="finite: true">
     <div class="uk-slider-container px-1 py-3">
         <ul class="uk-slider-items uk-child-width-1-3@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid">
-            @foreach($friends as $user)
-            <x-frontend.friends.friends-section-card :user="$user"/>
+            @foreach($otherFriends as $user)
+                <x-frontend.friends.friends-section-card :user="$user"/>
             @endforeach
         </ul>
 

@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
             'profile' => 'user'
         ]);
 
+    Route::get('/friends', [FriendsController::class, 'index'])->name('friends');
 
     Route::get('/send-friend-request/{user}', [FriendsController::class, 'processFriendRequest'])
         ->name('sendFriendRequest');
@@ -59,9 +60,9 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
 Route::get('/test', function () {
 //    dd(auth()->user()->getAllFriendships());
+    dd(auth()->user()->getFriendsOfFriends());
 //    dd(auth()->user()->getFriends());
-    dd(auth()->id());
 });
 
 
-Route::view('/friends', 'frontend.friends.index');
+//Route::view('/friends', 'frontend.friends.index');

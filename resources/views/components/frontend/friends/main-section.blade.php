@@ -19,7 +19,7 @@
         <div>
             <h2 class="text-xl font-semibold"> Your Friends also following</h2>
         </div>
-        <a href="#" class="text-blue-500"> See all </a>
+{{--        <a href="#" class="text-blue-500"> See all </a>--}}
     </div>
 
     {{ $mutualFriends }}
