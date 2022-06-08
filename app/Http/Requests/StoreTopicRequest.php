@@ -25,7 +25,7 @@ class StoreTopicRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|min:3',
-            'category' => 'array',
+            'category' => 'required|array',
             'cover_image' => 'image|mimes:jpg,png'
         ];
     }
