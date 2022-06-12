@@ -16,7 +16,7 @@
             <x-slot:reaction>Like</x-slot:reaction>
         </x-frontend.post-comments-reactions>
 
-        <x-frontend.post-comments-reactions href="{{ route('posts.show', $post) }}">
+        <x-frontend.post-comments-reactions href="{{ route('posts.show', $post) }}" >
             <x-slot:svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                      fill="currentColor"
@@ -32,7 +32,7 @@
             </x-slot:reaction>
         </x-frontend.post-comments-reactions>
 
-        <x-frontend.post-comments-reactions class="flex-1 justify-end">
+        <x-frontend.post-comments-reactions class="flex-1 justify-end" uk-toggle="target: #share-post-modal{{$post->id}}">
             <x-slot:svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                      fill="currentColor"
@@ -46,6 +46,17 @@
                 Share
             </x-slot:reaction>
         </x-frontend.post-comments-reactions>
+
+        {{-- Edit video modal --}}
+        <x-frontend.post-modal id="share-post-modal{{$post->id}}">
+
+            <x-frontend.modal-header :title="'Share this Post'"/>
+
+            <x-frontend.modal.post-social-share />
+
+        </x-frontend.post-modal>
+        {{-- End Edit video modal --}}
+
     </div>
 
     <div class="border-t py-4 space-y-4 dark:border-gray-600">

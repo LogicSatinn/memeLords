@@ -17,8 +17,7 @@
         </div>
         <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
             <a href="#" class="text-red-600"> <i class="uil-heart"></i> Love </a>
-            <a href="#"> Replay </a>
-            <span> 3d </span>
+            <span> {{ $comment->created_at->format('M Y') }} </span>
         </div>
     </div>
 </div>
