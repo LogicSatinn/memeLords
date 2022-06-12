@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Validation\ValidationException;
 use PHPUnit\Exception;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -131,12 +132,19 @@ class PostController extends Controller
      */
     public function comment(Request $request, Post $post): Redirector|Application|RedirectResponse
     {
-        $validated = $request->validate([
-            'comment' => 'required|string|min:3|max:255',
-        ]);
+        try {
+            $validated = $request->validate([
+                'comment' => 'required|string|min:3|max:255',
+            ]);
 
-        $post->comment($validated['comment']);
+            $post->comment($validated['comment']);
 
-        return redirect(route('posts.show', [$post]));
+            return redirect(route('posts.show', [$post]));
+        } catch (ValidationException $exception) {
+            toast($exception->getMessage(), 'error');
+
+            return back();
+        }
+
     }
 }

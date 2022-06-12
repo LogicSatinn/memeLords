@@ -45,6 +45,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/deny-friend-request/{user}', [FriendsController::class, 'denyFriendRequest'])
         ->name('denyFriendRequest');
+
+    Route::get('/unfriend-friend-request/{user}', [FriendsController::class, 'unfriendUser'])
+        ->name('unfriendUser');
 });
 
 Route::middleware(['auth', 'can:access dashboard'])->group(function () {
