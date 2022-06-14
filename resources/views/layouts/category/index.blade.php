@@ -32,10 +32,6 @@
                                                 Name
                                             </th>
                                             <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Topics
-                                            </th>
-                                            <th scope="col"
                                                 class="text-center text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                 Handle
                                             </th>
@@ -50,9 +46,6 @@
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     {{ $category->name }}
-                                                </td>
-                                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    Otto
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     <div
@@ -96,7 +89,7 @@
                                                                                 <div class="mb-3 w-96">
                                                                                     <label for="name"
                                                                                            class="form-label inline-block mb-2 text-gray-700">Name</label>
-                                                                                    <input type="email"
+                                                                                    <input type="text"
                                                                                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                                                                            id="name" name="name"
                                                                                            value="{{ $category->name }}"
@@ -137,7 +130,7 @@
                                                             <x-slot:form>
                                                                 @method('DELETE')
                                                                 <button type="submit"
-                                                                        onclick="event.preventDefault(); document.getElementById('deleteCategoryForm').submit();"
+{{--                                                                        onclick="event.preventDefault(); document.getElementById('deleteCategoryForm').submit();"--}}
                                                                         class="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
                                                                     Delete
                                                                 </button>
