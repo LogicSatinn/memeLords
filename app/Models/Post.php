@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Multicaret\Acquaintances\Traits\CanBeLiked;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
@@ -55,7 +56,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Post extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia, HasComments;
+    use HasFactory, SoftDeletes, InteractsWithMedia, HasComments, CanBeLiked;
 
     protected $fillable = [
         'title', 'user_id', 'topic_id',

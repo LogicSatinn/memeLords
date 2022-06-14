@@ -1,5 +1,6 @@
 <script src="{{ mix('js/app.js') }}" defer></script>
 <script src="{{ mix('js/tw-elements.js') }}" defer></script>
+<script src="{{ asset('js/share.js') }}"></script>
 @include('sweetalert::alert')
 
 <!-- For Night mode -->
@@ -48,4 +49,12 @@
 <script src="{{ asset('assets/js/custom.js')}}"></script>
 <script src="{{ asset("assets/js/bootstrap-select.min.js")}}"></script>
 <script src="{{ asset('assets/js/ionicons.js') }}"></script>
+
+<!-- Font Awesome -->
+<script src="{{ asset('font-awesome/js/all.min.js') }}"></script>
+<script src="{{ asset('font-awesome/js/fontawesome.min.js') }}"></script>
+<script src="{{ asset('font-awesome/js/regular.min.js') }}"></script>
+<script src="{{ asset('font-awesome/js/solid.min.js') }}"></script>
+
+
 @livewireScripts

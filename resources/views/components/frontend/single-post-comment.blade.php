@@ -15,6 +15,8 @@
             <div
                 class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
         </div>
-
+        <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
+            <span> {{ $comment->created_at->format('M Y') }} </span>
+        </div>
     </div>
 </div>

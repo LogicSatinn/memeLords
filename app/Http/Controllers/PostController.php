@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Validation\ValidationException;
 use PHPUnit\Exception;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -131,12 +132,47 @@ class PostController extends Controller
      */
     public function comment(Request $request, Post $post): Redirector|Application|RedirectResponse
     {
-        $validated = $request->validate([
-            'comment' => 'required|string|min:3|max:255',
-        ]);
+        try {
+            $validated = $request->validate([
+                'comment' => 'required|string|min:3|max:255',
+            ]);
 
-        $post->comment($validated['comment']);
+            $post->comment($validated['comment']);
 
-        return redirect(route('posts.show', [$post]));
+            return redirect(route('posts.show', [$post]));
+        } catch (ValidationException $exception) {
+            toast($exception->getMessage(), 'error');
+
+            return back();
+        }
+    }
+
+    /**
+     * @param Post $post
+     * @return Application|RedirectResponse|Redirector
+     * @throws \Exception
+     */
+    public function likePost(Post $post): Redirector|RedirectResponse|Application
+    {
+        try {
+            if (auth()->user()->hasLiked($post)) {
+                throw new \ErrorException('You can\'t like things twice. You\'re ruining the fun.');
+            }
+
+            auth()->user()->like($post);
+
+            toast('So you liked this post. Why don\'t you leave a comment too?', 'success');
+
+            return redirect(route('posts.show', [$post]));
+        } catch (Exception $exception) {
+            toast('Something went really wrong. We apologise for this.', 'error');
+
+            return back();
+        } catch (\ErrorException $e) {
+            toast($e->getMessage(), 'error');
+
+            return back();
+        }
+
     }
 }
