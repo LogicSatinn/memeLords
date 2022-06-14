@@ -17,6 +17,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/post/{post}/add-comment', [PostController::class, 'comment'])
         ->name('addComment');
 
+    Route::get('/like-post/{post}', [PostController::class, 'likePost'])
+        ->name('likePost');
+
     Route::resource('posts', PostController::class)
         ->except('create', 'edit');
 
@@ -46,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/deny-friend-request/{user}', [FriendsController::class, 'denyFriendRequest'])
         ->name('denyFriendRequest');
 
-    Route::get('/unfriend-friend-request/{user}', [FriendsController::class, 'unfriendUser'])
+    Route::get('/unfriend-friend/{user}', [FriendsController::class, 'unfriendUser'])
         ->name('unfriendUser');
 });
 
@@ -60,12 +63,3 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
         ->except('create', 'show', 'edit');
 });
 
-
-Route::get('/test', function () {
-//    dd(auth()->user()->getAllFriendships());
-    dd(auth()->user()->getFriendsOfFriends());
-//    dd(auth()->user()->getFriends());
-});
-
-
-//Route::view('/friends', 'frontend.friends.index');

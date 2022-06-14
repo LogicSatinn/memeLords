@@ -3,7 +3,8 @@
 <div class="profile user-profile">
 
     <div class="profiles_banner">
-        <img src="{{ asset('assets/images/avatars/profile-cover.jpg')}}" alt="">
+{{--        <img src="{{ asset('assets/images/avatars/profile-cover.jpg')}}" alt="">--}}
+        <img src="{{ asset('images/wolfgang-hasselmann-_EG_Th77EmQ-unsplash.jpg')}}" alt="">
 
     </div>
     <div class="profiles_content">
@@ -39,7 +40,7 @@
         <!-- button actions -->
         <div class="flex items-center space-x-1.5 flex-shrink-0 pr-4 mb-2 justify-center order-1 relative">
 
-            @if(! $user->isFriendWith(auth()->user()) && $user === auth()->user() && ! auth()->user()->hasSentFriendRequestTo($user))
+            @if(! $user->isFriendWith(auth()->user()) && $user !== auth()->user() && ! auth()->user()->hasSentFriendRequestTo($user))
             <!-- add story -->
             <a href="{{ route('sendFriendRequest', $user) }}"
                class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white"

@@ -145,6 +145,34 @@ class PostController extends Controller
 
             return back();
         }
+    }
+
+    /**
+     * @param Post $post
+     * @return Application|RedirectResponse|Redirector
+     * @throws \Exception
+     */
+    public function likePost(Post $post): Redirector|RedirectResponse|Application
+    {
+        try {
+            if (auth()->user()->hasLiked($post)) {
+                throw new \ErrorException('You can\'t like things twice. You\'re ruining the fun.');
+            }
+
+            auth()->user()->like($post);
+
+            toast('So you liked this post. Why don\'t you leave a comment too?', 'success');
+
+            return redirect(route('posts.show', [$post]));
+        } catch (Exception $exception) {
+            toast('Something went really wrong. We apologise for this.', 'error');
+
+            return back();
+        } catch (\ErrorException $e) {
+            toast($e->getMessage(), 'error');
+
+            return back();
+        }
 
     }
 }

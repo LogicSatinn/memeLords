@@ -20,13 +20,19 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use Multicaret\Acquaintances\Models\FriendFriendshipGroups;
+use Multicaret\Acquaintances\Models\Friendship;
+use Multicaret\Acquaintances\Traits\CanLike;
 use Multicaret\Acquaintances\Traits\Friendable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -72,24 +78,24 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Query\Builder|User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  * @mixin \Eloquent
- * @property-read Collection|\App\Models\Topic[] $myTopic
+ * @property-read Collection|Topic[] $myTopic
  * @property-read int|null $my_topic_count
- * @property-read Collection|\App\Models\Topic[] $topics
+ * @property-read Collection|Topic[] $topics
  * @property-read int|null $topics_count
- * @property-read Collection|\Multicaret\Acquaintances\Models\Friendship[] $friends
+ * @property-read Collection|Friendship[] $friends
  * @property-read int|null $friends_count
- * @property-read Collection|\Multicaret\Acquaintances\Models\FriendFriendshipGroups[] $groups
+ * @property-read Collection|FriendFriendshipGroups[] $groups
  * @property-read int|null $groups_count
- * @property-read Collection|\Spatie\Permission\Models\Permission[] $permissions
+ * @property-read Collection|Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property-read Collection|Role[] $roles
  * @property-read int|null $roles_count
  * @method static Builder|User permission($permissions)
  * @method static Builder|User role($roles, $guard = null)
  */
 class User extends Authenticatable implements HasMedia, Commentator
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, Friendable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, Friendable, HasRoles, CanLike;
 
     /**
      * The attributes that are mass assignable.
@@ -131,7 +137,7 @@ class User extends Authenticatable implements HasMedia, Commentator
     public function userName(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => '@' . $value,
+            get: fn($value) => '@' . Str::camel($value),
         );
     }
 

@@ -1,7 +1,8 @@
 <div class="profile user-profile">
 
     <div class="profiles_banner">
-        <img src="{{ asset('assets/images/avatars/profile-cover.jpg')}}" alt="">
+{{--        <img src="{{ asset('assets/images/avatars/profile-cover.jpg')}}" alt="">--}}
+        <img src="{{ asset('images/wolfgang-hasselmann-_EG_Th77EmQ-unsplash.jpg')}}" alt="">
 
     </div>
     <div class="profiles_content">
