@@ -3,7 +3,7 @@
 <div class="p-4 space-y-3">
 
     <div class="flex space-x-4 lg:font-bold">
-        <x-frontend.post-comments-reactions>
+        <x-frontend.post-comments-reactions href="{{ route('likePost', $post) }}">
             <x-slot:svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                      fill="currentColor"
@@ -13,8 +13,13 @@
                 </svg>
             </x-slot:svg>
 
-            <x-slot:reaction>Like</x-slot:reaction>
+            @if(auth()->user()->hasLiked($post))
+                <x-slot:reaction>Liked</x-slot:reaction>
+            @else
+                <x-slot:reaction>Like</x-slot:reaction>
+            @endif
         </x-frontend.post-comments-reactions>
+
 
         <x-frontend.post-comments-reactions href="{{ route('posts.show', $post) }}">
             <x-slot:svg>
@@ -32,7 +37,8 @@
             </x-slot:reaction>
         </x-frontend.post-comments-reactions>
 
-        <x-frontend.post-comments-reactions class="flex-1 justify-end">
+        <x-frontend.post-comments-reactions class="flex-1 justify-end"
+                                            uk-toggle="target: #share-post-modal{{$post->id}}">
             <x-slot:svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                      fill="currentColor"
@@ -46,32 +52,26 @@
                 Share
             </x-slot:reaction>
         </x-frontend.post-comments-reactions>
+
+        {{-- Edit video modal --}}
+        <x-frontend.post-modal id="share-post-modal{{$post->id}}">
+
+            <x-frontend.modal-header :title="'Share this Post'"/>
+
+            <x-frontend.modal.post-social-share/>
+
+        </x-frontend.post-modal>
+        {{-- End Edit video modal --}}
+
     </div>
 
     <div class="border-t py-4 space-y-4 dark:border-gray-600">
         @foreach($comments as $comment)
-        <x-frontend.single-post-comment :comment="$comment" />
-            @endforeach
+            <x-frontend.single-post-comment :comment="$comment"/>
+        @endforeach
     </div>
 
     <a href="{{ route('posts.show', $post) }}" class="text-center hover:text-blue-600 hover:underline"> View more
         Comments </a>
 
-    <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
-        <x-frontend.form-section
-            action="{{ route('addComment', $post) }}"
-            id="commentForm"
-        >
-            <x-slot:form>
-                <div class="flex justify-center space-x-1.5">
-                    <input placeholder="Add your Comment.." name="comment"
-                           class="bg-transparent max-h-10 shadow-none px-5">
-                    <button onclick="event.preventDefault(); document.getElementById('commentForm').submit();"
-                            class="flex items-center justify-center h-10 w-10 p-1 rounded-md bg-gray-100">
-                        Post
-                    </button>
-                </div>
-            </x-slot:form>
-        </x-frontend.form-section>
-    </div>
 </div>

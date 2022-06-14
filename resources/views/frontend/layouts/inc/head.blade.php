@@ -36,6 +36,15 @@
     <link rel="stylesheet" href="{{ asset('assets/css/uikit.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/regular.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/solid.min.css') }}">
+
+
     @livewireStyles
 
 </head>

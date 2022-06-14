@@ -2,7 +2,7 @@
 
 <div class="card">
 
-    <div class="h-44 mb-4 md:h-72 overflow-hidden relative rounded-t-lg w-full">
+    <div class="mb-4 overflow-hidden relative rounded-t-lg w-full" style="height: 850px">
         <x-frontend.show-post.single-post-card-media/>
     </div>
     <div class="p-7">

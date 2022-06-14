@@ -14,4 +14,10 @@
         <a href="{{ route('profile.show', $user) }}" class="text-base font-semibold capitalize"> {{ $user->name }} </a>
     </div>
 
+    @unless(! auth()->user()->isFriendWith($user) || auth()->user() !== $user)
+    <a href="{{ route('unfriendUser', $user) }}"
+       class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold bg-blue-500 text-white">
+        Unfriend
+    </a>
+    @endunless
 </div>
