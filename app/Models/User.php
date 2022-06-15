@@ -97,6 +97,8 @@ class User extends Authenticatable implements HasMedia, Commentator
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, InteractsWithMedia, CanComment, Friendable, HasRoles, CanLike;
 
+    protected $with = ['media', 'friends'];
+
     /**
      * The attributes that are mass assignable.
      *

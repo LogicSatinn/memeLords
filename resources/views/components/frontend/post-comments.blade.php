@@ -71,7 +71,11 @@
         @endforeach
     </div>
 
+    @if($post->comments->count() > 0)
     <a href="{{ route('posts.show', $post) }}" class="text-center hover:text-blue-600 hover:underline"> View more
         Comments </a>
+    @else
+        <a href="{{ route('posts.show', $post) }}" class="text-center hover:text-blue-600 hover:underline"> No comments yet. Want to comment? </a>
+    @endif
 
 </div>
