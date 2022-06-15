@@ -139,6 +139,8 @@ class PostController extends Controller
 
             $post->comment($validated['comment']);
 
+            toast('Comment added successfully', 'success');
+
             return redirect(route('posts.show', [$post]));
         } catch (ValidationException $exception) {
             toast($exception->getMessage(), 'error');

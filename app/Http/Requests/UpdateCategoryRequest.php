@@ -25,7 +25,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'cover_image' => 'image|mimes:jpg, png'
+            'cover_image' => 'image|mimes:jpg,png'
         ];
     }
 }

@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CategoryController extends Controller
 {
@@ -82,13 +84,19 @@ class CategoryController extends Controller
      * @param Category $category
      * @return Application|Redirector|RedirectResponse
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category): Redirector|RedirectResponse|Application
     {
         $category->update($request->validated());
 
         if ($request->has('cover_image')) {
-            $category->addMediaFromRequest('cover_image')
-                ->toMediaCollection('categories');
+            try {
+                $category->addMediaFromRequest('cover_image')
+                    ->toMediaCollection('categories');
+            } catch (FileDoesNotExist|FileIsTooBig $e) {
+                toast($e->getMessage(), 'error');
+
+                return back();
+            }
         }
 
         return redirect(route('categories.index'));
