@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Frontend;
 
-use App\Models\Clip;
 use App\Models\Post;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

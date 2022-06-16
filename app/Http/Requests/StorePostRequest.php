@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|min:3, max:500',
+            'title' => 'nullable|string|min:3|max:500',
             'image' => 'mimes:jpg,png|image',
             'clip' => 'mimes:mp4,webp,ogg|file',
             'user_id' => 'required|integer|exists:App\Models\User,id'
