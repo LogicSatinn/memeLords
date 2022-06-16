@@ -26,7 +26,7 @@ class PostController extends Controller
     public function index(): View|Factory|Application
     {
         return view('frontend.feed.index', [
-            'posts' => Post::with('media', 'user', 'comments.commentator')->inRandomOrder()->get(),
+            'posts' => Post::with('media', 'user', 'comments.commentator')->latest()->get(),
         ]);
     }
 
