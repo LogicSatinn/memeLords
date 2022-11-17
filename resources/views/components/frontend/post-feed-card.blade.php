@@ -15,9 +15,9 @@
                 @endif
             </a>
             <div class="flex-1 font-semibold capitalize">
-                <a href="{{ route('profile.show', $post->user) }}" class="text-black dark:text-gray-100"> {{ $post->user->username }} </a>
+                <a href="{{ route('profile.show', $post->user) }}" class="text-black"> {{ $post->user->username }} </a>
                 <div class="text-gray-700 flex items-center space-x-2">
-                    <a href="{{ route('posts.show', $post) }}" class="text-black dark:text-gray-100">{{ $post->title }}</a>
+                    <a href="{{ route('posts.show', $post) }}" class="text-black">{{ $post->title }}</a>
                     <ion-icon name="people"></ion-icon>
                 </div>
             </div>

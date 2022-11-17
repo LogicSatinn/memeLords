@@ -1,62 +1,26 @@
 <x-guest-layout>
-    <section class="h-screen">
-        <div class="container px-6 py-12 h-full">
-            <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-                <div class="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
-                    <img
-                        src="{{ asset('images/charlesdeluvio-K4mSJ7kc0As-unsplash.jpg') }}"
-                        class="w-100 mx-auto h-100"
-                        alt="Phone image"
-                    />
-                </div>
-                <div class="md:w-8/12 lg:w-5/12 lg:ml-20">
+    <x-auth-card>
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" />
 
-                    <x-application-logo class="mb-4"/>
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" />
 
-                    <!-- Session Status -->
-                    <x-auth-session-status class="mb-4" :status="session('status')"/>
+        <x-splade-form action="{{ route('login') }}" class="space-y-4">
+            <!-- Email Address -->
+            <x-splade-input id="email" type="email" name="email" :label="__('Email')" required autofocus />
+            <x-splade-input id="password" type="password" name="password" :label="__('Password')" required autocomplete="current-password" />
+            <x-splade-checkbox id="remember_me" name="remember" :label="__('Remember me')" />
 
-                    <!-- Validation Errors -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+            <div class="flex items-center justify-end">
+                @if (Route::has('password.request'))
+                    <Link class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </Link>
+                @endif
 
-                    <x-tw-elements.subtitles info="Don't have an account?" action="Register"
-                                             href="{{ route('register') }}"/>
-
-                    <x-frontend.form-section action="{{ route('login') }}">
-                        <x-slot name="form">
-                            <x-tw-elements.input type="email" name="email" placeholder="Email Address"
-                                                 value="{{ old('email') }}" required autofocus/>
-
-                            <x-tw-elements.input type="password" name="password" placeholder="Password" required
-                                                 autocomplete="current-password"/>
-
-                            <div class="flex justify-between items-center mb-6">
-                                <div class="form-group form-check">
-                                    <input
-                                        type="checkbox"
-                                        name="remember"
-                                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                        id="remember_me"
-                                        checked
-                                    />
-                                    <label class="form-check-label inline-block text-gray-800" for="remember_me"
-                                    >Remember me</label>
-                                </div>
-                                @if (Route::has('password.request'))
-                                    <a
-                                        href="{{ route('password.request') }}"
-                                        class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                                    >Forgot password?</a>
-                                @endif
-                            </div>
-
-                            <!-- Submit button -->
-
-                            <x-tw-elements.button type="submit" class="w-full" action="Sign In"/>
-                        </x-slot>
-                    </x-frontend.form-section>
-                </div>
+                <x-splade-submit class="ml-3" :label="__('Log in')" />
             </div>
-        </div>
-    </section>
+        </x-splade-form>
+    </x-auth-card>
 </x-guest-layout>

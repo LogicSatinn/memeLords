@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use ProtoneMedia\Splade\SpladeCore;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,6 +44,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(SpladeCore::exceptionHandler($this));
+
         $this->reportable(function (Throwable $e) {
             //
         });

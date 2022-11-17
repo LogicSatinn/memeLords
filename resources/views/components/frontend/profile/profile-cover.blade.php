@@ -57,26 +57,26 @@
 
             <!-- more icon -->
             <a href="#" class="flex items-center justify-center h-10 w-10 rounded-md bg-gray-100">
-                <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i>
+                <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1"></i>
             </a>
             <!-- more drowpdown -->
             <div
-                class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"
+                class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100"
                 uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small; offset:5">
                 <ul class="space-y-1">
                     <li>
                         <a href="#"
-                           class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                           class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md">
                             <ion-icon name="notifications-off-outline" class="pr-2 text-lg"></ion-icon>
                             Disable notifications
                         </a>
                     </li>
                     <li>
-                        <hr class="-mx-2 my-2 dark:border-gray-800">
+                        <hr class="-mx-2 my-2">
                     </li>
                     <li>
                         <a href="#"
-                           class="flex items-center px-3 py-2 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                           class="flex items-center px-3 py-2 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-md">
                             <ion-icon name="stop-circle-outline" class="pr-2 text-xl"></ion-icon>
                             Delete Account
                         </a>
