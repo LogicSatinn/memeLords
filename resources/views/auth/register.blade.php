@@ -1,64 +1,22 @@
 <x-guest-layout>
-    <section class="h-screen">
-        <div class="px-6 h-full text-gray-800">
-            <div
-                class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
-            >
-                <div
-                    class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
-                >
-                    <img
-                        src="{{ asset('images/raoul-droog-yMSecCHsIBc-unsplash.jpg') }}"
-                        class="w-100 mx-auto h-100"
-                        alt="Phone image"
-                    />
-                </div>
-                <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+    <x-auth-card>
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" />
 
-                    <x-application-logo class="mb-5"/>
+        <x-splade-form action="{{ route('register') }}" class="space-y-4">
+            <x-splade-input id="name" type="text" name="name" :label="__('Name')" required autofocus />
+            <x-splade-input id="username" type="text" name="username" :label="__('Username')" required autofocus />
+            <x-splade-input id="email" type="email" name="email" :label="__('Email')" required />
+            <x-splade-input id="password" type="password" name="password" :label="__('Password')" required autocomplete="new-password" />
+            <x-splade-input id="password_confirmation" type="password" name="password_confirmation" :label="__('Confirm Password')" required />
 
-                    <!-- Validation Errors -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+            <div class="flex items-center justify-end">
+                <Link class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                    {{ __('Already registered?') }}
+                </Link>
 
-                    <x-frontend.form-section action="{{ route('register') }}">
-                        <x-slot:form>
-                            <div class="flex flex-row items-center justify-center text-center lg:justify-start space-x-1.5">
-                                <p class="text-lg text-center mb-0 mr-4">Sign Up</p>
-                            </div>
-
-                            <div
-                                class="flex items-center my-4 before:flex-1 before:mt-0.5 after:flex-1 after:mt-0.5"
-                            >
-                            </div>
-
-                            <x-tw-elements.input type="text" name="name" placeholder="Name" value="{{ old('name') }}"
-                                                 required autofocus/>
-
-                            <x-tw-elements.input type="text" name="username" placeholder="Username"
-                                                 value="{{ old('username') }}" required autofocus/>
-
-                            <x-tw-elements.input type="email" name="email" placeholder="Email Address"
-                                                 value="{{ old('email') }}" required autofocus/>
-
-                            <!-- Password input -->
-                            <x-tw-elements.input type="password" name="password" placeholder="Password" required
-                                                 autocomplete="new-password"/>
-
-                            <x-tw-elements.input type="password" name="password_confirmation" required
-                                                 placeholder="Confirm Password"/>
-
-                            <div class="text-center lg:text-left">
-                                <x-tw-elements.button action="Sign Up" type="submit"/>
-
-                                <x-tw-elements.subtitles action="Login" info="Already Registered?"
-                                                         href="{{ route('login') }}"/>
-                            </div>
-
-                        </x-slot:form>
-                    </x-frontend.form-section>
-
-                </div>
+                <x-splade-submit class="ml-4" :label="__('Register')" />
             </div>
-        </div>
-    </section>
+        </x-splade-form>
+    </x-auth-card>
 </x-guest-layout>
