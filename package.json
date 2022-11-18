@@ -20,7 +20,6 @@
         "@protonemedia/laravel-splade": "^0.7.6",
         "@tailwindcss/typography": "^0.5.8",
         "@vitejs/plugin-vue": "^3.2.0",
-        "tw-elements": "^1.0.0-alpha12",
         "vue": "^3.2.45"
     }
 }
